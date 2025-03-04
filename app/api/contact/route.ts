@@ -14,7 +14,7 @@ async function sendEmailFromUserToAdmin(name: string, email: string, subject: st
       
       {
         from: "client_enquiry@resend.dev", // Email from the user
-        to: "manjuvermav27@gmail.com", // Your email address (recipient)
+        to: "business.contentqueries@gmail.com", // Your email address (recipient)
         subject: `Client Inquiry: ${subject}`, // Subject of the email
         html: `
         <div style="width: 100%; max-width: 680px; margin: 0 auto; font-family: 'Segoe UI', system-ui, sans-serif; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.05);">
@@ -34,9 +34,9 @@ async function sendEmailFromUserToAdmin(name: string, email: string, subject: st
         <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
             <div style="display: flex; align-items: center; gap: 40px; margin-bottom: 24px;">
             <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #FF00FF 0%, #00FFFF 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <span style="color: white; font-size: 24px;">📝</span>
+                <span style="color: white; font-size: 36px;margin-left:9px">📝</span>
             </div>
-            <div>
+            <div style="margin-left:15px;">
                 <h2 style="margin: 0; font-size: 20px; color: #1a1a1a;">${name}</h2>
                 <p style="margin: 4px 0 0; color: #666; font-size: 14px;">${email}</p>
             </div>
