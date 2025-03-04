@@ -1026,7 +1026,7 @@ export default function Portfolio() {
                         </div>
                         <div>
                           <div className="text-sm text-[#ffffffaa]">Email</div>
-                          <div className="font-medium text-white">vermamisthi432@gmail.com</div>
+                          <div className="font-medium text-white">manjuvermav27@gmail.com</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-4">

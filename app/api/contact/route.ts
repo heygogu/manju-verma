@@ -14,7 +14,7 @@ async function sendEmailFromUserToAdmin(name: string, email: string, subject: st
       
       {
         from: "client_enquiry@resend.dev", // Email from the user
-        to: "rohitnarnolia88@gmail.com", // Your email address (recipient)
+        to: "manjuvermav27@gmail.com", // Your email address (recipient)
         subject: `Client Inquiry: ${subject}`, // Subject of the email
         html: `
         <div style="width: 100%; max-width: 680px; margin: 0 auto; font-family: 'Segoe UI', system-ui, sans-serif; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.05);">
