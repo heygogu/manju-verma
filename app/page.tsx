@@ -1,5 +1,5 @@
 "use client"
-import { useState, useTransition } from "react"
+import { useEffect, useState, useTransition } from "react"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
@@ -41,21 +41,36 @@ export default function Portfolio() {
   const [isPending, startTransition] = useTransition();
   
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   
   // useEffect(() => {
   //   const handleMouseMove = (e: MouseEvent) => {
   //     setMousePosition({ x: e.clientX, y: e.clientY })
   //   }
     
+  //   const handleDrag = (e: MouseEvent) => {
+  //     setMousePosition({ x: e.clientX, y: e.clientY })
+  //   }
+
   //   window.addEventListener('mousemove', handleMouseMove)
-  //   return () => window.removeEventListener('mousemove', handleMouseMove)
+  //   window.addEventListener('drag', handleDrag)
+  //   return () => {
+  //     window.removeEventListener('mousemove', handleMouseMove)
+  //     window.removeEventListener('drag', handleDrag)
+  //   }
   // }, [])
   
   // const cursorVariants = {
   //   default: {
   //     x: mousePosition.x - 16,
   //     y: mousePosition.y - 16,
+  //   },
+  //   dragging: {
+  //     x: mousePosition.x - 16,
+  //     y: mousePosition.y - 16,
+  //     scale: 1.5,
+  //     backgroundColor: "#FF00FF",
+  //     borderColor: "#00FFFF",
   //   }
   // }
 
@@ -64,6 +79,8 @@ export default function Portfolio() {
 
   const submitForm = async (e: any) => {
     e.preventDefault();
+
+    
    
    
     const formData = new FormData(e.currentTarget as HTMLFormElement);
@@ -74,6 +91,13 @@ export default function Portfolio() {
       message: formData.get('message') as string,
     };
     console.log(payload)
+
+    if(!payload.name || !payload.email || !payload.subject || !payload.message) {
+      toast("Please fill all fields", {
+        className: "bg-red-500 text-white",
+      });
+      return
+    }
     startTransition(async () => {
       const result = await submitContactForm(payload);
       
@@ -158,7 +182,7 @@ export default function Portfolio() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Button className="relative hidden md:flex  group overflow-hidden bg-transparent border border-[#ffffff30] hover:border-[#ffffff60]">
+          <Button className="relative cursor-pointer hidden md:flex  group overflow-hidden bg-transparent border border-[#ffffff30] hover:border-[#ffffff60]">
             <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             <span className="relative  z-10">Let&apos;s Talk</span>
             <ArrowRight className="relative z-10 ml-2 h-4 w-4" />
@@ -218,7 +242,7 @@ export default function Portfolio() {
             </nav>
             
             <div className="mt-auto">
-              <Button className="w-full relative group overflow-hidden bg-transparent border border-[#ffffff30]">
+              <Button className="w-full cursor-pointer relative group overflow-hidden bg-transparent border border-[#ffffff30]">
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 <span className="relative z-10">Let&apos;s Talk</span>
                 <ArrowRight className="relative z-10 ml-2 h-4 w-4" />
@@ -259,16 +283,16 @@ export default function Portfolio() {
                     <span className="relative z-10">Captivate</span>
                   </motion.span>
                 </h1>
-                <p className="text-xl text-[#ffffffcc]">
+                <p className="text-md md:text-xl text-[#ffffffcc]">
                   Content writer with 3+ years of experience creating compelling narratives that engage, inform, and convert.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                  <Button size="lg" className="relative group overflow-hidden">
+                  <Button size="lg" className="relative cursor-pointer group overflow-hidden">
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-100 group-hover:opacity-80 transition-opacity duration-300"></span>
                     <span className="relative z-10 text-white">View My Work</span>
                     <ArrowRight className="relative z-10 ml-2 h-4 w-4 text-white" />
                   </Button>
-                  <Button size="lg" variant="outline" className="border-[#ffffff30] hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300">
+                  <Button size="lg" variant="outline" className="border-[#ffffff30] cursor-pointer hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300">
                     Download Resume
                   </Button>
                 </div>
@@ -428,12 +452,12 @@ export default function Portfolio() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                  <Button className="relative group overflow-hidden">
+                  <Button className="relative cursor-pointer group overflow-hidden">
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-100 group-hover:opacity-80 transition-opacity duration-300"></span>
                     <span className="relative z-10 text-white">Contact Me</span>
                     <ArrowRight className="relative z-10 ml-2 h-4 w-4 text-white" />
                   </Button>
-                  <Button variant="outline" className="border-[#ffffff30] hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300">
+                  <Button variant="outline" className="border-[#ffffff30] cursor-pointer hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300">
                     Download CV
                   </Button>
                 </div>
@@ -542,11 +566,11 @@ export default function Portfolio() {
 
             <Tabs defaultValue="all" className="w-full">
               <div className="flex justify-center mb-8 z-10">
-                <TabsList className="bg-[#ffffff10] border border-[#ffffff20]">
-                  <TabsTrigger value="all" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">All</TabsTrigger>
-                  <TabsTrigger value="blogs" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Blogs</TabsTrigger>
-                  <TabsTrigger value="websites" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Websites</TabsTrigger>
-                  <TabsTrigger value="emails" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Emails</TabsTrigger>
+                <TabsList className="bg-[#ffffff10]  border border-[#ffffff20]">
+                  <TabsTrigger value="all" className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">All</TabsTrigger>
+                  <TabsTrigger value="blogs" className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Blogs</TabsTrigger>
+                  <TabsTrigger value="websites" className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Websites</TabsTrigger>
+                  <TabsTrigger value="emails" className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Emails</TabsTrigger>
                 </TabsList>
               </div>
               
@@ -695,7 +719,7 @@ export default function Portfolio() {
             </Tabs>
 
             <div className="flex justify-center mt-12">
-              <Button variant="outline" size="lg" className="border-[#ffffff30] hover:border-[#ffffff60] text-white z-50 hover:text-[#00FFFF] transition-colors duration-300">
+              <Button variant="outline" size="lg" className="border-[#ffffff30] cursor-pointer hover:border-[#ffffff60] text-white z-50 hover:text-[#00FFFF] transition-colors duration-300">
                 View All Projects
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -907,12 +931,12 @@ export default function Portfolio() {
                     Let&apos;s work together to create content that engages your audience and drives results.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                    <Button size="lg" className="relative group overflow-hidden">
+                    <Button size="lg" className="cursor-pointer relative group overflow-hidden">
                       <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-100 group-hover:opacity-80 transition-opacity duration-300"></span>
                       <span className="relative z-10 text-white">Get Started</span>
                       <ArrowRight className="relative z-10 ml-2 h-4 w-4 text-white" />
                     </Button>
-                    <Button size="lg" variant="outline" className="border-[#ffffff30] hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300">
+                    <Button size="lg" variant="outline" className="cursor-pointer border-[#ffffff30] hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300">
                       View Portfolio
                     </Button>
                   </div>
