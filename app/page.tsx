@@ -1,6 +1,5 @@
 "use client"
-
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
@@ -11,6 +10,7 @@ import {
   ChevronDown,
   Edit3,
   FileText,
+  Loader,
   Mail,
   MessageSquare,
   Mic,
@@ -21,13 +21,15 @@ import {
   Users,
   X,
 } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { toast } from "sonner"
+import { submitContactForm } from "./actions"
+
 
 export default function Portfolio() {
   // const ref = useRef(null)
@@ -36,6 +38,7 @@ export default function Portfolio() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
   // const rotation = useTransform(scrollYProgress, [0, 1], [0, 360])
   // const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 1])
+  const [isPending, startTransition] = useTransition();
   
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -55,6 +58,38 @@ export default function Portfolio() {
   //     y: mousePosition.y - 16,
   //   }
   // }
+
+
+
+
+  const submitForm = async (e: any) => {
+    e.preventDefault();
+   
+   
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const payload = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      subject: formData.get('subject') as string,
+      message: formData.get('message') as string,
+    };
+    console.log(payload)
+    startTransition(async () => {
+      const result = await submitContactForm(payload);
+      
+      if (result.success) {
+        toast("Email sent successfully!", {
+          className: "bg-[#00FF00] text-white",
+        });
+      } else {
+        toast("Could not send email", {
+          className: "bg-red-500 text-white",
+          description: result.error || "Error sending email.",
+        });
+      }
+    });
+  };
+
 
   return (
     <div className="min-h-screen bg-[#0F0F1A] text-white overflow-hidden">
@@ -82,64 +117,64 @@ export default function Portfolio() {
       </div>
 
       {/* Header */}
-      <header className="sticky  top-0 z-40 w-full backdrop-blur-xl bg-[#0F0F1A]/80 border-b border-[#ffffff10]">
+      <header  className="fixed top-0 z-40 w-full backdrop-blur-xl bg-[#0F0F1A]/50 border-b border-[#ffffff10]">
         <div className="container px-2 md:px-10 flex h-16 items-center justify-between">
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+        className="flex items-center gap-2"
           >
-            <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-full blur-sm opacity-70 group-hover:opacity-100 transition duration-200"></div>
-              <div className="relative flex items-center justify-center rounded-full bg-[#0F0F1A] p-1.5">
-                <Edit3 className="h-6 w-6 text-[#00FFFF]" />
-              </div>
-            </div>
-            <span className="text-xl ml-2 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Manju.Writes</span>
+        <div className="relative" id="header">
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-full blur-sm opacity-70 group-hover:opacity-100 transition duration-200"></div>
+          <div className="relative flex items-center justify-center rounded-full bg-[#0F0F1A] p-1.5">
+            <Edit3 className="h-6 w-6 text-[#00FFFF]" />
+          </div>
+        </div>
+        <span className="text-xl ml-2 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Manju.Writes</span>
           </motion.div>
           
           <motion.nav 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="hidden md:flex items-center gap-8"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="hidden md:flex items-center gap-8"
           >
-            {["About", "Services", "Portfolio", "Testimonials", "Contact"].map((item, i) => (
-              <Link 
-                key={i}
-                href={`#${item.toLowerCase()}`} 
-                className="text-sm font-medium relative group"
-              >
-                <span className="relative z-10 text-white group-hover:text-[#00FFFF] transition-colors duration-300">{item}</span>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] group-hover:w-full transition-all duration-300"></span>
-              </Link>
-            ))}
+        {["About", "Services", "Portfolio", "Testimonials", "Contact"].map((item, i) => (
+          <Link 
+            key={i}
+            href={`#${item.toLowerCase()}`} 
+            className="text-sm font-medium relative group"
+          >
+            <span className="relative z-10 text-white group-hover:text-[#00FFFF] transition-colors duration-300">{item}</span>
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] group-hover:w-full transition-all duration-300"></span>
+          </Link>
+        ))}
           </motion.nav>
           
           <div className="flex items-center gap-4">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Button className="relative hidden md:block group overflow-hidden bg-transparent border border-[#ffffff30] hover:border-[#ffffff60]">
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative  z-10">Let&apos;s Talk</span>
-                <ArrowRight className="relative z-10 ml-2 h-4 w-4" />
-              </Button>
-            </motion.div>
-            
-            <button 
-              className="block md:hidden"
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <div className="space-y-1.5">
-                <span className="block w-6 h-0.5 bg-white"></span>
-                <span className="block w-6 h-0.5 bg-white"></span>
-                <span className="block w-6 h-0.5 bg-white"></span>
-              </div>
-            </button>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Button className="relative hidden md:flex  group overflow-hidden bg-transparent border border-[#ffffff30] hover:border-[#ffffff60]">
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            <span className="relative  z-10">Let&apos;s Talk</span>
+            <ArrowRight className="relative z-10 ml-2 h-4 w-4" />
+          </Button>
+        </motion.div>
+        
+        <button 
+          className="block md:hidden cursor-pointer"
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <div className="space-y-1.5">
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+          </div>
+        </button>
           </div>
         </div>
       </header>
@@ -162,9 +197,9 @@ export default function Portfolio() {
                     <Edit3 className="h-6 w-6 text-[#00FFFF]" />
                   </div>
                 </div>
-                <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Manju.Writes</span>
+                <span className="text-xl ml-2 font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Manju.Writes</span>
               </div>
-              <button onClick={() => setMobileMenuOpen(false)}>
+              <button className="cursor-pointer" onClick={() => setMobileMenuOpen(false)}>
                 <X className="h-6 w-6 text-white" />
               </button>
             </div>
@@ -660,7 +695,7 @@ export default function Portfolio() {
             </Tabs>
 
             <div className="flex justify-center mt-12">
-              <Button variant="outline" size="lg" className="border-[#ffffff30] hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300">
+              <Button variant="outline" size="lg" className="border-[#ffffff30] hover:border-[#ffffff60] text-white z-50 hover:text-[#00FFFF] transition-colors duration-300">
                 View All Projects
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -927,30 +962,49 @@ export default function Portfolio() {
                 className="bg-[#ffffff08] backdrop-blur-sm rounded-xl border border-[#ffffff20] p-8 relative group"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                <form className="space-y-6 relative z-10">
+                <form onSubmit={submitForm} className="space-y-6 relative z-10">
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium text-white">Name</label>
-                      <Input id="name" placeholder="Your name" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
+                      <Input id="name" name="name"
+                      
+                      placeholder="Your name" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium text-white">Email</label>
-                      <Input id="email" type="email" placeholder="Your email" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
+                      <Input id="email" type="email" name="email"
+                      
+                      placeholder="Your email" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="subject" className="text-sm font-medium text-white">Subject</label>
-                    <Input id="subject" placeholder="Project subject" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
+                    <Input id="subject"
+                    name="subject"
+                    placeholder="Project subject" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="message" className="text-sm font-medium text-white">Message</label>
-                    <Textarea id="message" placeholder="Tell me about your project" className="min-h-32 bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
+                    <Textarea id="message" 
+                   name="message"
+                    placeholder="Tell me about your project" className="min-h-32 bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
                   </div>
-                  <Button type="submit" className="w-full relative group overflow-hidden">
+                    <Button type="submit" className="w-full cursor-pointer relative group overflow-hidden" disabled={isPending}>
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-100 group-hover:opacity-80 transition-opacity duration-300"></span>
-                    <span className="relative z-10 text-white">Send Message</span>
-                    <Send className="relative z-10 ml-2 h-4 w-4 text-white" />
-                  </Button>
+                    <span className="relative z-10 text-white flex items-center justify-center">
+                      {isPending ? (
+                        <>
+                        Sending...
+                      <Loader className="animate-spin h-4 w-4 ml-2 text-white" />
+                        </>
+                      ) : (
+                      <>
+                        Send Message
+                        <Send className="ml-2 h-4 w-4 text-white" />
+                      </>
+                      )}
+                    </span>
+                    </Button>
                 </form>
               </motion.div>
 
@@ -972,7 +1026,7 @@ export default function Portfolio() {
                         </div>
                         <div>
                           <div className="text-sm text-[#ffffffaa]">Email</div>
-                          <div className="font-medium text-white">manju@gmail.com</div>
+                          <div className="font-medium text-white">vermamisthi432@gmail.com</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
@@ -981,7 +1035,17 @@ export default function Portfolio() {
                         </div>
                         <div>
                           <div className="text-sm text-[#ffffffaa]">Social Media</div>
-                          <div className="font-medium text-white">@manju.writes</div>
+                          <div className="font-medium text-white">
+                            {/* <Link href="#" className="text-[#00FFFF] hover:text-[#FF00FF] transition-colors">Twitter</Link> */}
+                            <Link target="_blank" href="https://www.linkedin.com/in/manju-verma-111b8518b/" className="h-6 w-6   flex items-center justify-center rounded-full bg-[#ffffff10] hover:bg-[#ffffff20] transition-colors group">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#00FFFF] group-hover:text-[#FF00FF] transition-colors">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                  </svg>
+                </Link>
+
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1026,7 +1090,7 @@ export default function Portfolio() {
         </section>
       </main>
 
-      <footer className="border-t border-[#ffffff20] px-5 md:px-10">
+      <footer className="border-tz-50 border-[#ffffff20] px-5 md:px-10">
         <div className="container py-12">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div className="space-y-4 z-10">
@@ -1097,7 +1161,7 @@ export default function Portfolio() {
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                   </svg>
                 </Link>
-                <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-[#ffffff10] hover:bg-[#ffffff20] transition-colors group">
+                <Link target="_blank" href="https://www.linkedin.com/in/manju-verma-111b8518b/" className="h-10 w-10 flex items-center justify-center rounded-full bg-[#ffffff10] hover:bg-[#ffffff20] transition-colors group">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#00FFFF] group-hover:text-[#FF00FF] transition-colors">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                     <rect x="2" y="9" width="4" height="12"></rect>
@@ -1107,8 +1171,8 @@ export default function Portfolio() {
               </div>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-[#ffffff20] text-center text-sm text-[#ffffffaa]">
-            <p className="z-50 text-white">&copy; 2025 Manju Verma. All rights reserved.</p>
+          <div className="mt-12  pt-8 border-t  text-center text-sm text-[#ffffffaa]">
+            <p className=" text-white">&copy; 2025 Manju Verma. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -1122,6 +1186,7 @@ export default function Portfolio() {
       >
         <Button
           size="icon"
+          onClick={() => window?.scrollTo({ top: 0, behavior: 'smooth' })}
           className="h-12 w-12 rounded-full shadow-lg relative group overflow-hidden"
         >
           <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-100 group-hover:opacity-80 transition-opacity duration-300"></span>
