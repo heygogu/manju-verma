@@ -21,6 +21,7 @@ import {
   Users,
   X,
 } from "lucide-react"
+import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -29,6 +30,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { toast } from "sonner"
 import { submitContactForm } from "./actions"
+import { Label } from "@/components/ui/label"
 
 
 export default function Portfolio() {
@@ -79,9 +81,6 @@ export default function Portfolio() {
 
   const submitForm = async (e: any) => {
     e.preventDefault();
-
-    
-   
    
     const formData = new FormData(e.currentTarget as HTMLFormElement);
     const payload = {
@@ -93,21 +92,23 @@ export default function Portfolio() {
     console.log(payload)
 
     if(!payload.name || !payload.email || !payload.subject || !payload.message) {
-      toast("Please fill all fields", {
-        className: "bg-red-500 text-white",
-      });
+      const missingFields = [];
+      if (!payload.name) missingFields.push("Name");
+      if (!payload.email) missingFields.push("Email");
+      if (!payload.subject) missingFields.push("Subject");
+      if (!payload.message) missingFields.push("Message");
+
+      toast.warning(`Please fill the following fields: ${missingFields.join(", ")}`);
       return
     }
     startTransition(async () => {
       const result = await submitContactForm(payload);
       
       if (result.success) {
-        toast("Email sent successfully!", {
-          className: "bg-[#00FF00] text-white",
-        });
+        toast.success("Email sent successfully!");
       } else {
-        toast("Could not send email", {
-          className: "bg-red-500 text-white",
+        toast.error("Could not send email", {
+      
           description: result.error || "Error sending email.",
         });
       }
@@ -258,33 +259,34 @@ export default function Portfolio() {
           <div className="container relative z-10">
             <div className="grid gap-12 md:grid-cols-2 items-center">
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="flex flex-col gap-6"
+                className="flex flex-col mt-2 md:mt-0 gap-6"
               >
                 <div className="inline-flex items-center rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm">
                   <span className="flex h-2 w-2 rounded-full bg-[#00FFFF] mr-2"></span>
                   Available for freelance projects
                 </div>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                   Crafting <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Words</span> That <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1, duration: 1.5 }}
-                    className="relative"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 1.5 }}
+                  className="relative inline-block"
                   >
-                    <motion.span
-                      initial={{ width: "0%" }}
-                      animate={{ width: "100%" }}
-                      transition={{ delay: 1.2, duration: 1 }}
-                      className="absolute bottom-2 left-0 h-3 bg-gradient-to-r from-[#FF00FF]/30 to-[#00FFFF]/30 z-0"
-                    />
-                    <span className="relative z-10">Captivate</span>
+                  {/* <motion.span
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ delay: 1.2, duration: 1 }}
+                    className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#FF00FF]/30 to-[#00FFFF]/30 z-50"
+                  /> */}
+                  
+                  <RoughNotation type="underline" color="#a855f7" iterations={3} animationDuration={2000} animate={true} show={true}> <span className="relative z-50">Captivate</span></RoughNotation>
                   </motion.span>
                 </h1>
                 <p className="text-md md:text-xl text-[#ffffffcc]">
-                  Content writer with 3+ years of experience creating compelling narratives that engage, inform, and convert.
+                  Content writer with <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]" >3+ years</span> of experience creating compelling narratives that engage, inform, and convert.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 mt-4">
                   <Button size="lg" className="relative cursor-pointer group overflow-hidden">
@@ -312,7 +314,7 @@ export default function Portfolio() {
                   </div>
                   <div className="text-sm">
                     <span className="font-medium text-white">50+ clients</span>
-                    <span className="text-[#ffffffaa]"> trusted my content</span>
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]"> trusted my content</span>
                   </div>
                 </div>
               </motion.div>
@@ -388,7 +390,7 @@ export default function Portfolio() {
               </div>
               <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">The Story Behind the Words</h2>
               <p className="max-w-3xl text-[#ffffffcc] text-lg">
-                Passionate about crafting compelling narratives that resonate with audiences and drive results.
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]" >Passionate</span> about crafting compelling narratives that resonate with <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]" > audiences</span> and drive results.
               </p>
             </motion.div>
 
@@ -422,10 +424,10 @@ export default function Portfolio() {
               >
                 <h3 className="text-2xl font-bold">Hi, I&apos;m <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Manju Verma</span></h3>
                 <p className="text-[#ffffffcc]">
-                  With over 3 years of experience in content writing, I&apos;ve helped businesses across various industries establish their voice and connect with their audience through compelling storytelling.
+                  With over <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]"> 3 years</span>  of experience in content writing, I&apos;ve helped businesses across various industries establish their voice and connect with their audience through <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">compelling</span>  storytelling.
                 </p>
                 <p className="text-[#ffffffcc]">
-                  My journey began with a passion for words and a degree in English Literature. Since then, I&apos;ve worked with startups, established brands, and everything in between to create content that not only ranks well but also resonates with readers.
+                  My journey began with a passion for words and a degree in <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]"> English Literature</span> . Since then, I&apos;ve worked with <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]"> startups, established brands,</span> and everything in between to create content that not only ranks well but also resonates with readers.
                 </p>
                 
                 <div className="grid grid-cols-2 gap-4 mt-4">
@@ -481,7 +483,7 @@ export default function Portfolio() {
               </div>
               <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text z-10  text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">How I Can Help You</h2>
               <p className="max-w-3xl z-10 text-[#ffffffcc] text-lg">
-                Specialized content writing services tailored to your specific needs and goals.
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Specialized</span> content writing services tailored to your <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">specific</span> needs and goals.
               </p>
             </motion.div>
 
@@ -560,7 +562,7 @@ export default function Portfolio() {
               </div>
               <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text z-10 text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Featured Work</h2>
               <p className="max-w-3xl text-[#ffffffcc] z-10 text-lg">
-                A selection of my best content writing projects across various industries.
+                A selection of my <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">best content</span> writing projects across various industries.
               </p>
             </motion.div>
 
@@ -742,7 +744,7 @@ export default function Portfolio() {
               </div>
               <h2 className="text-3xl md:text-5xl font-bold mb-4 z-10 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">How I Work</h2>
               <p className="max-w-3xl text-[#ffffffcc] z-10 text-lg">
-                A streamlined approach to delivering high-quality content that meets your objectives.
+                A <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]" >streamlined </span>approach to delivering <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">high-quality</span> content that meets your objectives.
               </p>
             </motion.div>
 
@@ -752,27 +754,27 @@ export default function Portfolio() {
               <div className="space-y-12 relative">
                 {[
                   {
-                    number: "01",
+                    number: "1",
                     title: "Discovery & Research",
                     description: "I start by understanding your business, audience, and goals to ensure the content aligns with your strategy."
                   },
                   {
-                    number: "02",
+                    number: "2",
                     title: "Content Strategy",
                     description: "Based on research, I develop a content strategy that outlines topics, keywords, and formats to achieve your objectives."
                   },
                   {
-                    number: "03",
+                    number: "3",
                     title: "Content Creation",
                     description: "I craft engaging, well-researched content that speaks to your audience and reflects your brand voice."
                   },
                   {
-                    number: "04",
+                    number: "4",
                     title: "Review & Refinement",
                     description: "You review the content and provide feedback, and I make revisions until you're completely satisfied."
                   },
                   {
-                    number: "05",
+                    number: "5",
                     title: "Delivery & Support",
                     description: "I deliver the finalized content and provide ongoing support to ensure it achieves the desired results."
                   },
@@ -791,7 +793,7 @@ export default function Portfolio() {
                         <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] text-4xl font-bold text-white relative z-10">
                           {step.number}
                         </div>
-                        <div className="absolute -inset-7 rounded-full border-2 border-dashed border-[#ffffff30] animate-spin" />
+                        <div className="absolute -inset-5 rounded-full border-2 border-dashed border-[#ffffff30] animate-spin" />
                       </div>
                     </div>
                     <div className="w-full mt-2 md:mt-0 md:w-1/2 bg-[#ffffff08] backdrop-blur-sm rounded-xl p-8 border border-[#ffffff20] relative group">
@@ -823,7 +825,7 @@ export default function Portfolio() {
               </div>
               <h2 className="text-3xl z-10 md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">What Clients Say</h2>
               <p className="max-w-3xl z-10 text-[#ffffffcc] text-lg">
-                Don&apos;t just take my word for it. Here&apos;s what my clients have to say about working with me.
+                Don&apos;t just take my <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]" >word</span> for it. Here&apos;s what my clients have to say about <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]" >working </span> with me.
               </p>
             </motion.div>
 
@@ -921,9 +923,9 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="rounded-xl bg-gradient-to-r from-[#FF00FF]/10 to-[#00FFFF]/10 border border-[#ffffff20] p-8 md:p-12 lg:p-16 relative overflow-hidden"
+              className="rounded-xl bg-gradient-to-r from-[#FF00FF]/10 to-[#00FFFF]/10   p-8 md:p-12 lg:p-16 relative overflow-hidden"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-3xl opacity-20"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-3xl  opacity-20"></div>
               <div className="grid gap-6 md:grid-cols-2 items-center relative z-10">
                 <div className="flex flex-col gap-4">
                   <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Ready to elevate your content?</h2>
@@ -973,7 +975,7 @@ export default function Portfolio() {
               </div>
               <h2 className="text-3xl z-10 md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Let&apos;s Work Together</h2>
               <p className="max-w-3xl z-10 text-[#ffffffcc] text-lg">
-                Have a project in mind? Get in touch and let&apos;s create something amazing together.
+                Have a <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]" >project</span> in mind? Get in touch and let&apos;s create something <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]" >amazing</span> together.
               </p>
             </motion.div>
 
@@ -983,35 +985,35 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="bg-[#ffffff08] backdrop-blur-sm rounded-xl border border-[#ffffff20] p-8 relative group"
+                className="bg-[#ffffff08] backdrop-blur-sm rounded-xl border  border-[#ffffff20] p-8 relative group"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                <form onSubmit={submitForm} className="space-y-6 relative z-10">
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 "></div>
+                <form onSubmit={submitForm} className="space-y-7 relative z-10">
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium text-white">Name</label>
+                      <Label htmlFor="name" className="text-sm  font-medium text-white">Name <span className="text-[#00FFFF]">*</span> </Label>
                       <Input id="name" name="name"
                       
-                      placeholder="Your name" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
+                      placeholder="Your name" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80] placeholder:text-sm" />
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium text-white">Email</label>
+                      <Label htmlFor="email" className="text-sm font-medium text-white">Email<span className="text-[#00FFFF]">*</span></Label>
                       <Input id="email" type="email" name="email"
                       
-                      placeholder="Your email" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
+                      placeholder="Your email" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80] placeholder:text-sm" />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium text-white">Subject</label>
+                    <Label htmlFor="subject" className="text-sm font-medium text-white">Subject<span className="text-[#00FFFF]">*</span></Label>
                     <Input id="subject"
                     name="subject"
-                    placeholder="Project subject" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
+                    placeholder="Project subject" className="bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80] placeholder:text-sm" />
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-white">Message</label>
+                    <Label htmlFor="message" className="text-sm font-medium text-white">Message<span className="text-[#00FFFF]">*</span></Label>
                     <Textarea id="message" 
                    name="message"
-                    placeholder="Tell me about your project" className="min-h-32 bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80]" />
+                    placeholder="Tell me about your project" className="min-h-32 bg-[#ffffff10] border-[#ffffff30] focus:border-[#00FFFF] text-white placeholder:text-[#ffffff80] placeholder:text-sm" />
                   </div>
                     <Button type="submit" className="w-full cursor-pointer relative group overflow-hidden" disabled={isPending}>
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-100 group-hover:opacity-80 transition-opacity duration-300"></span>
