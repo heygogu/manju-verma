@@ -1,7 +1,7 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion"
+import { useState } from "react"
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -30,31 +30,31 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 
 export default function Portfolio() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: false })
+  // const ref = useRef(null)
+ 
   const { scrollYProgress } = useScroll()
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
-  const rotation = useTransform(scrollYProgress, [0, 1], [0, 360])
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 1])
+  // const rotation = useTransform(scrollYProgress, [0, 1], [0, 360])
+  // const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 1])
   
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
+  // useEffect(() => {
+  //   const handleMouseMove = (e: MouseEvent) => {
+  //     setMousePosition({ x: e.clientX, y: e.clientY })
+  //   }
     
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  //   window.addEventListener('mousemove', handleMouseMove)
+  //   return () => window.removeEventListener('mousemove', handleMouseMove)
+  // }, [])
   
-  const cursorVariants = {
-    default: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 16,
-    }
-  }
+  // const cursorVariants = {
+  //   default: {
+  //     x: mousePosition.x - 16,
+  //     y: mousePosition.y - 16,
+  //   }
+  // }
 
   return (
     <div className="min-h-screen bg-[#0F0F1A] text-white overflow-hidden">
@@ -125,7 +125,7 @@ export default function Portfolio() {
             >
               <Button className="relative hidden md:block group overflow-hidden bg-transparent border border-[#ffffff30] hover:border-[#ffffff60]">
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative  z-10">Let's Talk</span>
+                <span className="relative  z-10">Let&apos;s Talk</span>
                 <ArrowRight className="relative z-10 ml-2 h-4 w-4" />
               </Button>
             </motion.div>
@@ -185,7 +185,7 @@ export default function Portfolio() {
             <div className="mt-auto">
               <Button className="w-full relative group overflow-hidden bg-transparent border border-[#ffffff30]">
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative z-10">Let's Talk</span>
+                <span className="relative z-10">Let&apos;s Talk</span>
                 <ArrowRight className="relative z-10 ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -361,12 +361,12 @@ export default function Portfolio() {
                 viewport={{ once: true }}
                 className="flex flex-col gap-6"
               >
-                <h3 className="text-2xl font-bold">Hi, I'm <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Manju Verma</span></h3>
+                <h3 className="text-2xl font-bold">Hi, I&apos;m <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Manju Verma</span></h3>
                 <p className="text-[#ffffffcc]">
-                  With over 3 years of experience in content writing, I've helped businesses across various industries establish their voice and connect with their audience through compelling storytelling.
+                  With over 3 years of experience in content writing, I&apos;ve helped businesses across various industries establish their voice and connect with their audience through compelling storytelling.
                 </p>
                 <p className="text-[#ffffffcc]">
-                  My journey began with a passion for words and a degree in English Literature. Since then, I've worked with startups, established brands, and everything in between to create content that not only ranks well but also resonates with readers.
+                  My journey began with a passion for words and a degree in English Literature. Since then, I&apos;ve worked with startups, established brands, and everything in between to create content that not only ranks well but also resonates with readers.
                 </p>
                 
                 <div className="grid grid-cols-2 gap-4 mt-4">
@@ -764,7 +764,7 @@ export default function Portfolio() {
               </div>
               <h2 className="text-3xl z-10 md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">What Clients Say</h2>
               <p className="max-w-3xl z-10 text-[#ffffffcc] text-lg">
-                Don't just take my word for it. Here's what my clients have to say about working with me.
+                Don&apos;t just take my word for it. Here&apos;s what my clients have to say about working with me.
               </p>
             </motion.div>
 
@@ -800,7 +800,7 @@ export default function Portfolio() {
                               <Star key={star} className="h-5 w-5 fill-[#00FFFF] text-[#00FFFF]" />
                             ))}
                           </div>
-                          <blockquote className="text-xl italic mb-6 text-[#ffffffee]">"{testimonial.quote}"</blockquote>
+                          <blockquote className="text-xl italic mb-6 text-[#ffffffee]">&quot;{testimonial.quote}&quot;</blockquote>
                           <div className="flex flex-col items-center">
                             <div className="h-16 w-16 rounded-full overflow-hidden mb-4 border-2 border-[#ffffff30]">
                               <Image 
@@ -869,7 +869,7 @@ export default function Portfolio() {
                 <div className="flex flex-col gap-4">
                   <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Ready to elevate your content?</h2>
                   <p className="text-lg text-[#ffffffcc] ">
-                    Let's work together to create content that engages your audience and drives results.
+                    Let&apos;s work together to create content that engages your audience and drives results.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 mt-4">
                     <Button size="lg" className="relative group overflow-hidden">
@@ -912,9 +912,9 @@ export default function Portfolio() {
               <div className="inline-flex items-center rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm mb-4">
                 Contact Me
               </div>
-              <h2 className="text-3xl z-10 md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Let's Work Together</h2>
+              <h2 className="text-3xl z-10 md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">Let&apos;s Work Together</h2>
               <p className="max-w-3xl z-10 text-[#ffffffcc] text-lg">
-                Have a project in mind? Get in touch and let's create something amazing together.
+                Have a project in mind? Get in touch and let&apos;s create something amazing together.
               </p>
             </motion.div>
 
