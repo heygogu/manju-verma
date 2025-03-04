@@ -140,11 +140,21 @@ export default function Portfolio() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="hidden md:flex items-center gap-8"
           >
-        {["About", "Services", "Portfolio", "Testimonials", "Contact"].map((item, i) => (
+        {["About", "Services","Blogs", "Portfolio", "Testimonials", "Contact"].map((item, i) => (
           <Link 
             key={i}
             href={`#${item.toLowerCase()}`} 
             className="text-sm font-medium relative group"
+            onClick={(e) => {
+              if (item.toLowerCase() === "blogs") {
+                e.preventDefault();
+                const blogTab = document.getElementById("blog-tab");
+                if (blogTab) {
+                  blogTab.click();
+                }
+                document.getElementById("blogs")?.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
           >
             <span className="relative z-10 text-white group-hover:text-[#00FFFF] transition-colors duration-300">{item}</span>
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] group-hover:w-full transition-all duration-300"></span>
@@ -205,7 +215,7 @@ export default function Portfolio() {
             </div>
             
             <nav className="flex flex-col gap-6 text-lg">
-              {["About", "Services", "Portfolio", "Testimonials", "Contact"].map((item, i) => (
+              {["About", "Services","Blogs", "Portfolio", "Testimonials", "Contact"].map((item, i) => (
                 <Link 
                   key={i}
                   href={`#${item.toLowerCase()}`} 
@@ -522,8 +532,8 @@ export default function Portfolio() {
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" className="py-20 px-5 md:px-10">
-          <div className="container">
+        <section id="portfolio" className="py-20 px-5 md:px-10" >
+          <div className="container" id="blogs">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -540,11 +550,11 @@ export default function Portfolio() {
               </p>
             </motion.div>
 
-            <Tabs defaultValue="all" className="w-full">
+            <Tabs  defaultValue="all" className="w-full">
               <div className="flex justify-center mb-8 z-10">
-                <TabsList className="bg-[#ffffff10] border border-[#ffffff20]">
+                <TabsList  className="bg-[#ffffff10] border border-[#ffffff20]">
                   <TabsTrigger value="all" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">All</TabsTrigger>
-                  <TabsTrigger value="blogs" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Blogs</TabsTrigger>
+                  <TabsTrigger id="blog-tab" value="blogs" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Blogs</TabsTrigger>
                   <TabsTrigger value="websites" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Websites</TabsTrigger>
                   <TabsTrigger value="emails" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white">Emails</TabsTrigger>
                 </TabsList>
