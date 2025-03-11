@@ -11,8 +11,11 @@ import Link from "next/link";
 import {
   ArrowRight,
   BookOpen,
+  ChartNoAxesCombined,
   CheckCircle,
   ChevronDown,
+  Clipboard,
+  Computer,
   Edit3,
   FileText,
   Loader,
@@ -304,11 +307,11 @@ export default function Portfolio() {
                   Available for freelance projects
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                  Crafting{" "}
+                  Where{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     Words
                   </span>{" "}
-                  That{" "}
+                  Flow and
                   <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -321,7 +324,6 @@ export default function Portfolio() {
                     transition={{ delay: 1.2, duration: 1 }}
                     className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#FF00FF]/30 to-[#00FFFF]/30 z-50"
                   /> */}
-
                     <RoughNotation
                       type="underline"
                       color="#a855f7"
@@ -331,17 +333,20 @@ export default function Portfolio() {
                       show={true}
                     >
                       {" "}
-                      <span className="relative z-50">Captivate</span>
-                    </RoughNotation>
+                      <span className="relative z-50 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
+                        Stories
+                      </span>
+                    </RoughNotation>{" "}
+                    Glow
                   </motion.span>
                 </h1>
                 <p className="text-md md:text-xl text-[#ffffffcc]">
-                  Content writer with{" "}
+                  Passionate content writer with{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
-                    3+ years
+                    2+ years
                   </span>{" "}
-                  of experience creating compelling narratives that engage,
-                  inform, and convert.
+                  of experience weaving engaging narratives that captivate,
+                  inform, and inspire. .
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 mt-4">
                   <Button
@@ -419,7 +424,7 @@ export default function Portfolio() {
                         Projects Completed
                       </div>
                       <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
-                        200+
+                        50+
                       </div>
                     </div>
                   </div>
@@ -517,51 +522,53 @@ export default function Portfolio() {
                   </span>
                 </h3>
                 <p className="text-[#ffffffcc]">
-                  With over{" "}
+                  I
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     {" "}
-                    3 years
+                    love
                   </span>{" "}
-                  of experience in content writing, I&apos;ve helped businesses
-                  across various industries establish their voice and connect
-                  with their audience through{" "}
+                  turning ideas into stories that connect, inspire, and engage.
+                  With over two years of experience in content writing, I’ve
+                  worked both full-time and as a freelancer across various
+                  industries, helping brands find their voice and connect with
+                  their audience through compelling storytelling and{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
-                    compelling
+                    SEO-optimized
                   </span>{" "}
-                  storytelling.
+                  content.
                 </p>
                 <p className="text-[#ffffffcc]">
-                  My journey began with a passion for words and a degree in{" "}
+                  My journey started with a simple love{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     {" "}
-                    English Literature
+                    for words
                   </span>{" "}
-                  . Since then, I&apos;ve worked with{" "}
+                  . and a desire to express myself better. Since then, I’ve
+                  worked with startups and established brands alike, creating
+                  content that not only ranks but truly
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     {" "}
-                    startups, established brands,
+                    resonates with readers.{" "}
                   </span>{" "}
-                  and everything in between to create content that not only
-                  ranks well but also resonates with readers.
                 </p>
 
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   {[
                     {
                       icon: <PenTool className="h-5 w-5 text-[#FF00FF]" />,
-                      label: "SEO Content",
+                      label: "SEO Content writing",
                     },
                     {
                       icon: <BookOpen className="h-5 w-5 text-[#00FFFF]" />,
-                      label: "Blog Articles",
+                      label: "Creative writing ",
                     },
                     {
-                      icon: <Target className="h-5 w-5 text-[#FF00FF]" />,
-                      label: "Email Campaigns",
+                      icon: <Computer className="h-5 w-5 text-[#FF00FF]" />,
+                      label: "Technical writing",
                     },
                     {
-                      icon: <Users className="h-5 w-5 text-[#00FFFF]" />,
-                      label: "Social Media",
+                      icon: <Clipboard className="h-5 w-5 text-[#00FFFF]" />,
+                      label: "Copywriting ",
                     },
                   ].map((item, i) => (
                     <motion.div
@@ -618,11 +625,11 @@ export default function Portfolio() {
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                   Specialized
                 </span>{" "}
-                content writing services tailored to your{" "}
+                content writing services designed to match your{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
-                  specific
+                  needs and goals,
                 </span>{" "}
-                needs and goals.
+                ensuring engaging, impactful, and result-driven content.
               </p>
             </motion.div>
 
@@ -632,37 +639,39 @@ export default function Portfolio() {
                   icon: <FileText className="h-10 w-10 text-[#FF00FF]" />,
                   title: "Blog & Article Writing",
                   description:
-                    "Engaging, SEO-optimized blog posts and articles that establish your authority and drive organic traffic.",
+                    "Crafting engaging, well-researched blogs and articles that inform, inspire, and keep readers coming back for more. Every piece is designed to boost your brand’s credibility and visibility with a perfect balance of storytelling and SEO.",
                 },
                 {
                   icon: <Target className="h-10 w-10 text-[#00FFFF]" />,
-                  title: "Website Copywriting",
+                  title: "Copywriting",
                   description:
-                    "Compelling website copy that communicates your value proposition and converts visitors into customers.",
-                },
-                {
-                  icon: <Mail className="h-10 w-10 text-[#FF00FF]" />,
-                  title: "Email Campaigns",
-                  description:
-                    "Strategic email sequences that nurture leads, build relationships, and drive conversions.",
+                    "Words have power, and I know how to make them work for you! Whether it's website copy, ad campaigns, or product descriptions, I create persuasive, action-driven content that turns readers into loyal customers.",
                 },
                 {
                   icon: <Users className="h-10 w-10 text-[#00FFFF]" />,
                   title: "Social Media Content",
                   description:
-                    "Engaging social media content that builds community and increases brand awareness.",
+                    "From scroll-stopping captions to viral-worthy posts, I create content that sparks conversations and builds genuine connections. Every post is tailored to fit your brand’s voice and engage your audience across platforms.",
                 },
                 {
-                  icon: <Mic className="h-10 w-10 text-[#FF00FF]" />,
-                  title: "Podcast Scripts",
+                  icon: (
+                    <ChartNoAxesCombined className="h-10 w-10 text-[#FF00FF]" />
+                  ),
+                  title: "SEO Content Writing",
                   description:
-                    "Well-structured podcast scripts that engage listeners and deliver value.",
+                    "I don’t just write—I make sure your content gets found! With SEO-friendly articles and web copy, I help your brand climb search rankings and attract the right audience organically.",
                 },
                 {
-                  icon: <BookOpen className="h-10 w-10 text-[#00FFFF]" />,
-                  title: "Ebooks & Whitepapers",
+                  icon: <Computer className="h-10 w-10 text-[#FF00FF]" />,
+                  title: "Technical Writing",
                   description:
-                    "In-depth resources that position you as an industry leader and generate quality leads.",
+                    "Tech talk doesn’t have to be boring! I break down complex topics into clear, easy-to-understand content, whether it's user manuals, guides, or whitepapers, making technical information accessible to everyone.",
+                },
+                {
+                  icon: <Mail className="h-10 w-10 text-[#00FFFF]" />,
+                  title: "Email Marketing",
+                  description:
+                    "Your inbox deserves better, and so do your customers! I write emails that grab attention, nurture leads, and drive action—whether it’s a catchy newsletter, a compelling promo, or a heartfelt thank-you.",
                 },
               ].map((service, i) => (
                 <motion.div
