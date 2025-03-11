@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useTransition } from "react";
+import { Suspense, useEffect, useState, useTransition } from "react";
 import {
   motion,
   useScroll,
@@ -43,19 +43,73 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { toast } from "sonner";
+import axios from "axios";
 import { submitContactForm } from "./actions";
 import { Label } from "@/components/ui/label";
+import PageLoader from "@/components/PageLoader2";
+interface BlogPost {
+  author: string;
+  content: string;
+  coverImage: string;
+  createdAt: string;
+  excerpt: string;
+  publishDate: string;
+  slug: string;
+  status: string;
+  tags: string[];
+  title: string;
+  updatedAt: string;
+  views: number;
+  __v: number;
+  _id: string;
+}
 
+interface BlogListing {
+  data: BlogPost[];
+  count: number;
+  currentPage: number;
+  totalPages: number;
+}
 export default function Portfolio() {
   // const ref = useRef(null)
 
+  const [loading,setLoading] = useState(true)  
   const { scrollYProgress } = useScroll();
+  const [isHovered, setIsHovered] = useState(false)
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   // const rotation = useTransform(scrollYProgress, [0, 1], [0, 360])
   // const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.2, 1])
   const [isPending, startTransition] = useTransition();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [blogListing, setBlogListing] = useState<BlogListing>({
+    data: [],
+    count: 0,
+    currentPage: 0,
+    totalPages: 0,
+  });
+
+const getInitialBlogs = async () => {
+  // setLoading(true);
+  try {
+    const apiRes=await axios.get('/api/blogs?limit=6')
+    setBlogListing((prev) => ({
+      ...prev,
+      data: apiRes?.data?.data,
+      count: apiRes?.data?.count,
+      currentPage: apiRes?.data?.currentPage,
+      totalPages: apiRes?.data?.totalPages,
+    }));
+  } catch (error) {
+    
+  }finally{
+    setLoading(false)
+  }
+}
+  useEffect(() => {
+    getInitialBlogs()
+  }, []);
   // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // useEffect(() => {
@@ -132,6 +186,7 @@ export default function Portfolio() {
   };
 
   return (
+    
     <div className="min-h-screen bg-[#0F0F1A] text-white overflow-hidden">
       {/* Custom cursor */}
       {/* <motion.div 
@@ -139,15 +194,17 @@ export default function Portfolio() {
         variants={cursorVariants}
         animate="default"
       /> */}
-
-      {/* Progress bar */}
-      <motion.div
+      {loading ?
+    <PageLoader/>:(
+      <>
+       {/* Progress bar */}
+       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#FF00FF] z-50"
         style={{ scaleX: scrollYProgress }}
       />
 
       {/* Background elements */}
-      <div className="fixed inset-0 z-0">
+      <div className="fixed left-0 right-0 top-[calc(100vh-65vh)]">
         <div className="absolute top-0 left-0 w-full h-full bg-[#0F0F1A] opacity-90" />
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-[10%] left-[20%] w-64 h-64 rounded-full bg-[#FF00FF] filter blur-[100px] opacity-20 animate-pulse" />
@@ -729,37 +786,37 @@ export default function Portfolio() {
               </p>
             </motion.div>
 
-            <Tabs defaultValue="all" className="w-full">
+            <Tabs defaultValue="blogs" className="w-full px-2">
               <div className="flex justify-center mb-8 z-10">
-                <TabsList className="bg-[#ffffff10]  border border-[#ffffff20]">
-                  <TabsTrigger
+                <TabsList className="bg-[#ffffff10] rounded-3xl   border border-[#ffffff20]">
+                  {/* <TabsTrigger
                     value="all"
                     className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
                   >
                     All
-                  </TabsTrigger>
+                  </TabsTrigger> */}
                   <TabsTrigger
                     value="blogs"
-                    className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
+                    className="cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
                   >
                     Blogs
                   </TabsTrigger>
                   <TabsTrigger
                     value="websites"
-                    className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
+                    className="cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
                   >
                     Websites
                   </TabsTrigger>
                   <TabsTrigger
                     value="emails"
-                    className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
+                    className="cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
                   >
                     Emails
                   </TabsTrigger>
                 </TabsList>
               </div>
 
-              <TabsContent value="all" className="mt-0">
+              {/* <TabsContent value="all" className="mt-0">
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                   {[
                     {
@@ -848,75 +905,13 @@ export default function Portfolio() {
                     </motion.div>
                   ))}
                 </div>
-              </TabsContent>
+              </TabsContent> */}
 
               <TabsContent value="blogs" className="mt-0">
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {[
-                    {
-                      title: "How to Optimize Your Content for SEO",
-                      category: "Blog Article",
-                      client: "TechCorp",
-                      image:
-                        "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg",
-                    },
-                    {
-                      title: "10 Content Marketing Trends for 2023",
-                      category: "Blog Article",
-                      client: "Marketing Agency",
-                      image:
-                        "https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg",
-                    },
-                    {
-                      title: "The Ultimate Guide to Storytelling",
-                      category: "Blog Article",
-                      client: "Media Company",
-                      image:
-                        "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg",
-                    },
-                  ].map((project, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: i * 0.1 }}
-                      viewport={{ once: true }}
-                      className="group relative overflow-hidden rounded-xl border border-[#ffffff20]"
-                    >
-                      <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 z-0"></div>
-                      <div className="aspect-[4/3] w-full overflow-hidden relative z-10">
-                        <Image
-                          src={project.image || "/placeholder.svg"}
-                          alt={project.title}
-                          width={600}
-                          height={400}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F1A] via-[#0F0F1A]/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                      <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <div className="text-sm font-medium text-[#00FFFF] mb-2">
-                          {project.category}
-                        </div>
-                        <h3 className="text-xl font-bold mb-1 text-white">
-                          {project.title}
-                        </h3>
-                        <p className="text-[#ffffffcc] mb-4">
-                          Client: {project.client}
-                        </p>
-                        <Button
-                          size="sm"
-                          className="relative group overflow-hidden w-fit"
-                        >
-                          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-100 group-hover:opacity-80 transition-opacity duration-300"></span>
-                          <span className="relative z-10 text-white">
-                            View Project
-                          </span>
-                          <ArrowRight className="relative z-10 ml-2 h-4 w-4 text-white" />
-                        </Button>
-                      </div>
-                    </motion.div>
-                  ))}
+                  {blogListing?.data?.length ? blogListing?.data?.map((project, i) => (
+                   <BlogCard key={i} project={project} index={i}/>
+                  )):""}
                 </div>
               </TabsContent>
 
@@ -1677,6 +1672,143 @@ export default function Portfolio() {
           <ChevronDown className="h-6 w-6 rotate-180 relative z-10 text-white" />
         </Button>
       </motion.div>
+      </>
+    )  
+    }
+
+     
     </div>
+    
   );
+}
+interface Project {
+  title: string
+  slug: string
+  excerpt: string
+  coverImage: string
+  tags: string[]
+
+}
+function BlogCard({ project, index }: { project: Project; index: number }) {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="group relative overflow-hidden rounded-xl"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Enhanced gradient border effect */}
+      <motion.div
+        className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl z-0"
+        animate={{
+          opacity: isHovered ? 0.6 : 0,
+          scale: isHovered ? 1.05 : 1,
+        }}
+        transition={{ duration: 0.4 }}
+      />
+
+      {/* Image container */}
+      <div className="aspect-[4/3] w-full overflow-hidden relative z-10">
+        <motion.div
+          animate={{
+            scale: isHovered ? 1.08 : 1,
+          }}
+          transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+          className="h-full w-full"
+        >
+          <Image
+            src={project?.coverImage || "/placeholder.svg"}
+            alt={project?.title}
+            width={600}
+            height={400}
+            className="h-full w-full object-cover"
+          />
+        </motion.div>
+      </div>
+
+      {/* Enhanced overlay with animated reveal */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-t from-[#313146] via-[#0F0F1A]/80 to-transparent z-20"
+        animate={{
+          opacity: isHovered ? 1 : 0,
+          y: isHovered ? 0 : 20,
+        }}
+        transition={{ duration: 0.3 }}
+      />
+
+      {/* Content container with animated reveal */}
+      <motion.div
+        className="absolute inset-0 flex flex-col justify-end p-6 z-30"
+        animate={{
+          opacity: isHovered ? 1 : 0,
+          y: isHovered ? 0 : 10,
+        }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+      >
+        {/* Category badge with glow effect */}
+        <div className="flex flex-wrap gap-2 mb-2">
+          {project?.tags?.map((tag, i) => (
+            <motion.div
+              key={i}
+              className="text-xs font-medium bg-gradient-to-r from-[#FF00FF] to-[#e273c195] rounded-full px-2.5 py-1"
+              animate={{
+          opacity: isHovered ? 1 : 0,
+          x: isHovered ? 0 : -10,
+              }}
+              transition={{ duration: 0.3, delay: 0.1 + i * 0.1 }}
+              style={{
+          textShadow: "0 0 8px rgba(0, 255, 255, 0.5)",
+              }}
+            >
+              {tag}
+            </motion.div>
+          ))}
+        </div>
+        
+        {/* <motion.div
+          className="text-sm font-medium text-[#00FFFF] mb-2"
+          animate={{
+            x: isHovered ? 0 : -10,
+            opacity: isHovered ? 1 : 0,
+          }}
+          transition={{ duration: 0.3, delay: 0.15 }}
+          style={{
+            textShadow: "0 0 8px rgba(0, 255, 255, 0.5)",
+          }}
+        >
+          {"Blog"}
+        </motion.div> */}
+
+        
+
+        {/* Link button with enhanced animation */}
+        <Link href={`/blog/${project?.slug}`} passHref>
+          <motion.div
+            animate={{
+              y: isHovered ? 0 : 20,
+              opacity: isHovered ? 1 : 0,
+            }}
+            transition={{ duration: 0.3, delay: 0.25 }}
+          >
+            {/* Title with animated reveal */}
+        <motion.h3
+          className="text-xl font-bold mb-1 text-white"
+          animate={{
+            y: isHovered ? 0 : 15,
+            opacity: isHovered ? 1 : 0,
+          }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+        >
+          {project?.title} <ArrowRight className="h-4 w-4 inline-block" />
+        </motion.h3>
+          </motion.div>
+        </Link>
+      </motion.div>
+    </motion.div>
+  )
 }
