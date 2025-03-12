@@ -6,7 +6,7 @@ const PageLoader = () => {
     <>
    
       <motion.div
-        className="h-[calc(100vh-30vh)] flex z-50 items-center justify-center"
+        className="h-[calc(100vh-10vh)] flex z-50 items-center justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}

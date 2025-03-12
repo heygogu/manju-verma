@@ -220,7 +220,7 @@ const getInitialBlogs = async () => {
       </div>
 
       {/* Header */}
-      <header className="fixed top-0 z-40 w-full backdrop-blur-xl bg-[#0F0F1A]/50 border-b border-[#ffffff10]">
+      <header className="fixed top-0 z-40 px-6 md:px-0 w-full backdrop-blur-xl bg-[#0F0F1A]/50 border-b border-[#ffffff10]">
         <div className="container mx-auto flex h-16 items-center justify-between">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -350,7 +350,7 @@ const getInitialBlogs = async () => {
 
       <main>
         {/* Hero Section */}
-        <section className="relative  overflow-hidden py-20 md:py-32">
+        <section className="relative px-6 md:px-0  overflow-hidden py-20 md:py-32">
           <div className="container mx-auto relative z-10">
             <div className="grid gap-12 md:grid-cols-2 items-center">
               <motion.div
@@ -368,7 +368,7 @@ const getInitialBlogs = async () => {
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     Words
                   </span>{" "}
-                  Flow and
+                  Flow and {" "}
                   <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -391,7 +391,7 @@ const getInitialBlogs = async () => {
                     >
                       {" "}
                       <span className="relative z-50 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
-                        Stories
+                        {" "}Stories
                       </span>
                     </RoughNotation>{" "}
                     Glow
@@ -501,7 +501,7 @@ const getInitialBlogs = async () => {
                         Client Satisfaction
                       </div>
                       <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
-                        98%
+                        96%
                       </div>
                     </div>
                   </div>
@@ -516,7 +516,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-20  relative">
+        <section id="about" className="py-20 px-6 md:px-0  relative">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -663,7 +663,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-20   bg-[#ffffff05]">
+        <section id="services" className="py-20 px-6 md:px-0  bg-[#ffffff05]">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -726,7 +726,7 @@ const getInitialBlogs = async () => {
                 },
                 {
                   icon: <Mail className="h-10 w-10 text-[#00FFFF]" />,
-                  title: "Email Marketing",
+                  title: "Email Marketing Copy",
                   description:
                     "Your inbox deserves better, and so do your customers! I write emails that grab attention, nurture leads, and drive action—whether it’s a catchy newsletter, a compelling promo, or a heartfelt thank-you.",
                 },
@@ -762,7 +762,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" className="py-20 ">
+        <section id="portfolio" className="py-20 px-6 md:px-0">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -943,7 +943,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Process Section */}
-        <section className="py-20 bg-[#ffffff05]">
+        <section className="py-20 px-6 md:px-0 bg-[#ffffff05]">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -961,11 +961,11 @@ const getInitialBlogs = async () => {
               <p className="max-w-3xl text-[#ffffffcc] z-10 text-lg">
                 A{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
-                  streamlined{" "}
+                  mindful{" "}
                 </span>
                 approach to delivering{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
-                  high-quality
+                  high-quality, SEO optimized
                 </span>{" "}
                 content that meets your objectives.
               </p>
@@ -1048,7 +1048,7 @@ const getInitialBlogs = async () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="flex flex-col items-center text-center mb-16"
+              className="flex flex-col px-6 md:px-0 items-center text-center mb-16"
             >
               <div className="inline-flex  items-center rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm mb-4">
                 Testimonials
@@ -1061,15 +1061,15 @@ const getInitialBlogs = async () => {
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                   word
                 </span>{" "}
-                for it. Here&apos;s what my clients have to say about{" "}
+                for it- see what my amazing clients have to say about their experience{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                   working{" "}
                 </span>{" "}
-                with me.
+                with me! Their words speak louder than mine.
               </p>
             </motion.div>
 
-            <Carousel className="w-full max-w-5xl mx-auto">
+            <Carousel className="w-full px-4 md:px-0 max-w-5xl mx-auto">
               <CarouselContent>
                 {[
                   {
@@ -1142,14 +1142,14 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-20  bg-[#ffffff05]">
+        <section className="py-20 px-6 md:px-0 bg-[#ffffff05]">
           <div className=" container mx-auto">
             <div className="grid gap-8 md:grid-cols-4">
               {[
-                { number: "200+", label: "Projects Completed" },
-                { number: "50+", label: "Happy Clients" },
-                { number: "3+", label: "Years Experience" },
-                { number: "98%", label: "Client Satisfaction" },
+                { number: "50+", label: "Projects Completed" },
+                { number: "20+", label: "Happy Clients" },
+                { number: "2+", label: "Years Experience" },
+                { number: "96%", label: "Client Satisfaction" },
               ].map((stat, i) => (
                 <motion.div
                   key={i}
@@ -1170,7 +1170,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 ">
+        <section className="py-20 px-6 md:px-0">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -1227,7 +1227,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20  bg-[#ffffff05]">
+        <section id="contact" className="py-20 px-6 md:px-0 bg-[#ffffff05]">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

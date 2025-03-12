@@ -107,5 +107,7 @@
 
 
 
-
+.container{
+  margin-inline: auto !important;
+}
 
