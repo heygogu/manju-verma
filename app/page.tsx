@@ -220,8 +220,8 @@ const getInitialBlogs = async () => {
       </div>
 
       {/* Header */}
-      <header className="fixed top-0 z-40 px-6 md:px-0 w-full backdrop-blur-xl bg-[#0F0F1A]/50 border-b border-[#ffffff10]">
-        <div className="container mx-auto flex h-16 items-center justify-between">
+      <header className="fixed top-0 z-40 px-6 md:px-15 lg:px-55 w-full backdrop-blur-xl bg-[#0F0F1A]/50 border-b border-[#ffffff10]">
+        <div className="container  flex h-16 items-center justify-between">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -350,7 +350,7 @@ const getInitialBlogs = async () => {
 
       <main>
         {/* Hero Section */}
-        <section className="relative px-6 md:px-0  overflow-hidden py-20 md:py-32">
+        <section className="relative px-6 md:px-15 lg:px-55  overflow-hidden py-20 md:py-32">
           <div className="container mx-auto relative z-10">
             <div className="grid gap-12 md:grid-cols-2 items-center">
               <motion.div
@@ -363,7 +363,7 @@ const getInitialBlogs = async () => {
                   <span className="flex h-2 w-2 rounded-full bg-[#00FFFF] mr-2"></span>
                   Available for freelance projects
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                   Where{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     Words
@@ -397,7 +397,7 @@ const getInitialBlogs = async () => {
                     Glow
                   </motion.span>
                 </h1>
-                <p className="text-md md:text-xl text-[#ffffffcc]">
+                <p className="text-md md:text-lg text-[#ffffffcc]">
                   Passionate content writer with{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     2+ years
@@ -516,8 +516,8 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-20 px-6 md:px-0  relative">
-          <div className="container mx-auto">
+        <section id="about" className="py-20  px-6 md:px-15 lg:px-55  relative">
+          <div className="container mx-auto ">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -528,10 +528,10 @@ const getInitialBlogs = async () => {
               <div className="inline-flex items-center rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm mb-4">
                 About Me
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                 The Story Behind the Words
               </h2>
-              <p className="max-w-3xl text-[#ffffffcc] text-lg">
+              <p className="max-w-3xl text-[#ffffffcc] text-md md:text-lg">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                   Passionate
                 </span>{" "}
@@ -572,13 +572,13 @@ const getInitialBlogs = async () => {
                 viewport={{ once: true }}
                 className="flex flex-col gap-6"
               >
-                <h3 className="text-2xl font-bold">
+                <h3 className="text-xl md:text-2xl font-bold">
                   Hi, I&apos;m{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     Manju Verma
                   </span>
                 </h3>
-                <p className="text-[#ffffffcc]">
+                <p className="text-[#ffffffcc] ">
                   I
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     {" "}
@@ -594,7 +594,7 @@ const getInitialBlogs = async () => {
                   </span>{" "}
                   content.
                 </p>
-                <p className="text-[#ffffffcc]">
+                <p className="text-[#ffffffcc] ">
                   My journey started with a simple love{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     {" "}
@@ -663,7 +663,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-20 px-6 md:px-0  bg-[#ffffff05]">
+        <section id="services" className="py-20  px-6 md:px-15 lg:px-55  bg-[#ffffff05]">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -675,10 +675,10 @@ const getInitialBlogs = async () => {
               <div className="inline-flex items-center rounded-full  border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm mb-4">
                 My Services
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text z-10  text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text z-10  text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                 How I Can Help You
               </h2>
-              <p className="max-w-3xl z-10 text-[#ffffffcc] text-lg">
+              <p className="max-w-3xl text-md md:text-lg z-10 text-[#ffffffcc] text-lg">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                   Specialized
                 </span>{" "}
@@ -693,39 +693,39 @@ const getInitialBlogs = async () => {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  icon: <FileText className="h-10 w-10 text-[#FF00FF]" />,
+                  icon: <FileText className="h-8 w-8 text-[#FF00FF]" />,
                   title: "Blog & Article Writing",
                   description:
                     "Crafting engaging, well-researched blogs and articles that inform, inspire, and keep readers coming back for more. Every piece is designed to boost your brand’s credibility and visibility with a perfect balance of storytelling and SEO.",
                 },
                 {
-                  icon: <Target className="h-10 w-10 text-[#00FFFF]" />,
+                  icon: <Target className="h-8 w-8 text-[#00FFFF]" />,
                   title: "Copywriting",
                   description:
                     "Words have power, and I know how to make them work for you! Whether it's website copy, ad campaigns, or product descriptions, I create persuasive, action-driven content that turns readers into loyal customers.",
                 },
                 {
-                  icon: <Users className="h-10 w-10 text-[#00FFFF]" />,
+                  icon: <Users className="h-8 w-8 text-[#00FFFF]" />,
                   title: "Social Media Content",
                   description:
                     "From scroll-stopping captions to viral-worthy posts, I create content that sparks conversations and builds genuine connections. Every post is tailored to fit your brand’s voice and engage your audience across platforms.",
                 },
                 {
                   icon: (
-                    <ChartNoAxesCombined className="h-10 w-10 text-[#FF00FF]" />
+                    <ChartNoAxesCombined className="h-8 w-8 text-[#FF00FF]" />
                   ),
                   title: "SEO Content Writing",
                   description:
                     "I don’t just write—I make sure your content gets found! With SEO-friendly articles and web copy, I help your brand climb search rankings and attract the right audience organically.",
                 },
                 {
-                  icon: <Computer className="h-10 w-10 text-[#FF00FF]" />,
+                  icon: <Computer className="h-8 w-8 text-[#FF00FF]" />,
                   title: "Technical Writing",
                   description:
                     "Tech talk doesn’t have to be boring! I break down complex topics into clear, easy-to-understand content, whether it's user manuals, guides, or whitepapers, making technical information accessible to everyone.",
                 },
                 {
-                  icon: <Mail className="h-10 w-10 text-[#00FFFF]" />,
+                  icon: <Mail className="h-8 w-8 text-[#00FFFF]" />,
                   title: "Email Marketing Copy",
                   description:
                     "Your inbox deserves better, and so do your customers! I write emails that grab attention, nurture leads, and drive action—whether it’s a catchy newsletter, a compelling promo, or a heartfelt thank-you.",
@@ -741,14 +741,14 @@ const getInitialBlogs = async () => {
                 >
                   <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                   <div className="flex flex-col gap-4 relative z-10">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-[#FF00FF]/10 to-[#00FFFF]/10 group-hover:from-[#FF00FF]/20 group-hover:to-[#00FFFF]/20 transition-colors duration-300">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-[#FF00FF]/10 to-[#00FFFF]/10 group-hover:from-[#FF00FF]/20 group-hover:to-[#00FFFF]/20 transition-colors duration-300">
                       {service.icon}
                     </div>
-                    <h3 className="text-xl font-bold">{service.title}</h3>
-                    <p className="text-[#ffffffcc]">{service.description}</p>
+                    <h3 className="md:text-xl text-lg font-bold">{service.title}</h3>
+                    <p className="text-[#ffffffcc] text-sm md:text-md">{service.description}</p>
                     <Link
                       href="#"
-                      className="inline-flex items-center text-[#00FFFF] font-medium group-hover:text-[#FF00FF] transition-colors duration-300"
+                      className="inline-flex text-sm items-center text-[#00FFFF] font-medium group-hover:text-[#FF00FF] transition-colors duration-300"
                     >
                       Learn more
                       <ArrowRight className="ml-1 h-4 w-4" />
@@ -762,7 +762,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" className="py-20 px-6 md:px-0">
+        <section id="portfolio" className="py-20 px-6 md:px-15 lg:px-55">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -774,10 +774,10 @@ const getInitialBlogs = async () => {
               <div className="inline-flex items-center rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm mb-4">
                 My Portfolio
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text z-10 text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text z-10 text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                 Featured Work
               </h2>
-              <p className="max-w-3xl text-[#ffffffcc] z-10 text-lg">
+              <p className="max-w-3xl  text-[#ffffffcc] z-10 text-md md:text-lg">
                 A selection of my{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                   best content
@@ -908,7 +908,7 @@ const getInitialBlogs = async () => {
               </TabsContent> */}
 
               <TabsContent value="blogs" className="mt-0">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {blogListing?.data?.length ? blogListing?.data?.map((project, i) => (
                    <BlogCard key={i} project={project} index={i}/>
                   )):""}
@@ -943,7 +943,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Process Section */}
-        <section className="py-20 px-6 md:px-0 bg-[#ffffff05]">
+        <section className="py-20 px-6 md:px-15 lg:px-55 bg-[#ffffff05]">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -955,10 +955,10 @@ const getInitialBlogs = async () => {
               <div className="inline-flex items-center rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm mb-4">
                 My Process
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 z-10 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 z-10 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                 How I Work
               </h2>
-              <p className="max-w-3xl text-[#ffffffcc] z-10 text-lg">
+              <p className="max-w-3xl text-[#ffffffcc] z-10 text-md md:text-lg">
                 A{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                   mindful{" "}
@@ -1026,11 +1026,11 @@ const getInitialBlogs = async () => {
                         <div className="absolute -inset-5 rounded-full border-2 border-dashed border-[#ffffff30] animate-spin" />
                       </div>
                     </div>
-                    <div className="w-full mt-2 md:mt-0 md:w-1/2 bg-[#ffffff08] backdrop-blur-sm rounded-xl p-8 border border-[#ffffff20] relative group">
+                    <div className="w-full mt-2 md:mt-0 md:w-1/2 bg-[#ffffff08] backdrop-blur-sm rounded-xl p-5 md:p-8 border border-[#ffffff20] relative group">
                       <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#1d4a4a] rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                       <div className="relative z-10">
-                        <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-                        <p className="text-[#ffffffcc]">{step.description}</p>
+                        <h3 className="text-lg md:text-xl font-bold mb-2">{step.title}</h3>
+                        <p className="text-[#ffffffcc] text-sm md:text-md">{step.description}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -1041,7 +1041,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Testimonials Section */}
-        <section id="testimonials" className=" py-20">
+        <section id="testimonials" className=" py-20 px-6 md:px-15 lg:px-55">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -1053,10 +1053,10 @@ const getInitialBlogs = async () => {
               <div className="inline-flex  items-center rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm mb-4">
                 Testimonials
               </div>
-              <h2 className="text-3xl z-10 md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
+              <h2 className="text-3xl md:text-4xl z-10  font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                 What Clients Say
               </h2>
-              <p className="max-w-3xl z-10 text-[#ffffffcc] text-lg">
+              <p className="max-w-3xl z-10 text-[#ffffffcc] text-md md:text-lg">
                 Don&apos;t just take my{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                   word
@@ -1107,7 +1107,7 @@ const getInitialBlogs = async () => {
                               />
                             ))}
                           </div>
-                          <blockquote className="text-xl italic mb-6 text-[#ffffffee]">
+                          <blockquote className="text-md md:text-lg italic mb-6 text-[#ffffffee]">
                             &quot;{testimonial.quote}&quot;
                           </blockquote>
                           <div className="flex flex-col items-center">
@@ -1120,7 +1120,7 @@ const getInitialBlogs = async () => {
                                 className="h-full w-full object-cover"
                               />
                             </div>
-                            <div className="text-lg font-bold text-white">
+                            <div className="text-md md:text-lg font-bold text-white">
                               {testimonial.name}
                             </div>
                             <div className="text-sm text-[#ffffffaa]">
@@ -1142,7 +1142,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-20 px-6 md:px-0 bg-[#ffffff05]">
+        <section className="py-20 px-6 md:px-15 lg:px-55 bg-[#ffffff05]">
           <div className=" container mx-auto">
             <div className="grid gap-8 md:grid-cols-4">
               {[
@@ -1159,7 +1159,7 @@ const getInitialBlogs = async () => {
                   viewport={{ once: true }}
                   className="flex flex-col items-center text-center"
                 >
-                  <div className="z-10 text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] mb-2">
+                  <div className="z-10 text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] mb-2">
                     {stat.number}
                   </div>
                   <div className="z-10 text-[#ffffffcc]">{stat.label}</div>
@@ -1170,7 +1170,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-6 md:px-0">
+        <section className="py-20 px-6 md:px-15 lg:px-55">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -1185,7 +1185,7 @@ const getInitialBlogs = async () => {
                   <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                     Ready to elevate your content?
                   </h2>
-                  <p className="text-lg text-[#ffffffcc] ">
+                  <p className="text-md md:text-lg text-[#ffffffcc] ">
                     Let&apos;s work together to create content that engages your
                     audience and drives results.
                   </p>
@@ -1227,7 +1227,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 px-6 md:px-0 bg-[#ffffff05]">
+        <section id="contact" className="py-20 px-6 md:px-15 lg:px-55 bg-[#ffffff05]">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -1239,10 +1239,10 @@ const getInitialBlogs = async () => {
               <div className="inline-flex items-center rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm mb-4">
                 Contact Me
               </div>
-              <h2 className="text-3xl z-10 md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
+              <h2 className="text-3xl z-10 md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                 Let&apos;s Work Together
               </h2>
-              <p className="max-w-3xl z-10 text-[#ffffffcc] text-lg">
+              <p className="max-w-3xl z-10 text-[#ffffffcc] text-md md:text-lg">
                 Have a{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
                   project
@@ -1357,7 +1357,7 @@ const getInitialBlogs = async () => {
                 <div className="rounded-xl border border-[#ffffff20] bg-[#ffffff08] backdrop-blur-sm p-6 relative group">
                   <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                   <div className="relative z-10">
-                    <h3 className="text-xl font-bold mb-4 text-white">
+                    <h3 className="text-lg md:text-xl font-bold mb-4 text-white">
                       Contact Information
                     </h3>
                     <div className="space-y-4">
@@ -1367,7 +1367,7 @@ const getInitialBlogs = async () => {
                         </div>
                         <div>
                           <div className="text-sm text-[#ffffffaa]">Email</div>
-                          <div className="font-medium text-white">
+                          <div className="font-medium text-white text-md ">
                             business.contentqueries@gmail.com
                           </div>
                         </div>
@@ -1415,7 +1415,7 @@ const getInitialBlogs = async () => {
                   <div className="  bg-[#ffffff08] backdrop-blur-sm p-6 relative group">
                     <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                     <div className="relative z-10">
-                      <h3 className="text-xl font-bold mb-4 text-white">
+                      <h3 className="text-md md:text-lg font-bold mb-4 text-white">
                         Frequently Asked Questions
                       </h3>
                       <div className="space-y-4">
@@ -1437,7 +1437,7 @@ const getInitialBlogs = async () => {
                           },
                         ].map((faq, i) => (
                           <div key={i} className="space-y-2">
-                            <div className="font-medium flex items-center text-white">
+                            <div className="font-medium flex items-center text-white text-md ">
                               <CheckCircle className="h-4 w-4 text-[#00FFFF] mr-2" />
                               {faq.question}
                             </div>
@@ -1456,7 +1456,7 @@ const getInitialBlogs = async () => {
         </section>
       </main>
 
-      <footer className="border-tz-50 border-[#ffffff20] px-5 md:px-10">
+      <footer className="border-tz-50 border-[#ffffff20] px-6 md:px-15 lg:px-55">
         <div className="container mx-auto py-12">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div className="space-y-4 z-10">
@@ -1471,7 +1471,7 @@ const getInitialBlogs = async () => {
                   Manju.Writes
                 </span>
               </div>
-              <p className="text-[#ffffffcc]">
+              <p className="text-[#ffffffcc] text-md ">
                 Professional content writer helping brands tell their stories
                 and connect with their audience.
               </p>
@@ -1480,7 +1480,7 @@ const getInitialBlogs = async () => {
               <h3 className="text-lg font-semibold mb-4 text-white">
                 Quick Links
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 text-md">
                 <li>
                   <Link
                     href="#about"
@@ -1519,7 +1519,7 @@ const getInitialBlogs = async () => {
               <h3 className="text-lg font-semibold mb-4 text-white">
                 Services
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 text-md">
                 <li>
                   <Link
                     href="#"
@@ -1743,7 +1743,7 @@ function BlogCard({ project, index }: { project: Project; index: number }) {
 
       {/* Content container with animated reveal */}
       <motion.div
-        className="absolute inset-0 flex flex-col justify-end p-6 z-30"
+        className="absolute inset-0 flex flex-col justify-end p-4 z-30"
         animate={{
           opacity: isHovered ? 1 : 0,
           y: isHovered ? 0 : 10,
@@ -1797,7 +1797,7 @@ function BlogCard({ project, index }: { project: Project; index: number }) {
           >
             {/* Title with animated reveal */}
         <motion.h3
-          className="text-xl font-bold mb-1 text-white"
+          className="text-sm font-bold mb-1 text-white"
           animate={{
             y: isHovered ? 0 : 15,
             opacity: isHovered ? 1 : 0,
