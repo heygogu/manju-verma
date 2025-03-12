@@ -359,7 +359,7 @@ const getInitialBlogs = async () => {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="flex flex-col mt-2 md:mt-0 gap-6"
               >
-                <div className="inline-flex items-center rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm">
+                <div className="inline-flex w-72 items-center gap-3 rounded-full border border-[#ffffff30] px-4 py-1.5 text-sm font-medium bg-[#ffffff10] backdrop-blur-sm">
                   <span className="flex h-2 w-2 rounded-full bg-[#00FFFF] mr-2"></span>
                   Available for freelance projects
                 </div>
@@ -403,7 +403,7 @@ const getInitialBlogs = async () => {
                     2+ years
                   </span>{" "}
                   of experience weaving engaging narratives that captivate,
-                  inform, and inspire. .
+                  inform, and inspire. 
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 mt-4">
                   <Button
