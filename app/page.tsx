@@ -47,6 +47,9 @@ import axios from "axios";
 import { submitContactForm } from "./actions";
 import { Label } from "@/components/ui/label";
 import PageLoader from "@/components/PageLoader2";
+import WebsiteCard from "@/components/WebsiteCard";
+import EmailCard from "@/components/EmailCard";
+import { BlogCard } from "@/components/BlogCard";
 interface BlogPost {
   author: string;
   content: string;
@@ -66,10 +69,11 @@ interface BlogPost {
 
 interface BlogListing {
   data: BlogPost[];
-  count: number;
-  currentPage: number;
-  totalPages: number;
+  
 }
+// This would be replaced with your actual data fetching
+
+
 export default function Portfolio() {
   // const ref = useRef(null)
 
@@ -85,31 +89,59 @@ export default function Portfolio() {
 
   const [blogListing, setBlogListing] = useState<BlogListing>({
     data: [],
-    count: 0,
-    currentPage: 0,
-    totalPages: 0,
+    
   });
+  const [websiteListing, setWebsiteListing] = useState<any>(null)
+  const [emailListing, setEmailListing] = useState<any>(null)
+   
 
-const getInitialBlogs = async () => {
-  // setLoading(true);
+
+  
+const getInitialEmails = async () => {
   try {
-    const apiRes=await axios.get('/api/blogs?limit=6')
-    setBlogListing((prev) => ({
-      ...prev,
-      data: apiRes?.data?.data,
-      count: apiRes?.data?.count,
-      currentPage: apiRes?.data?.currentPage,
-      totalPages: apiRes?.data?.totalPages,
-    }));
+    const apiRes=await axios.get('/api/emails/listing')
+    return apiRes?.data
   } catch (error) {
     
-  }finally{
-    setLoading(false)
+  }
+};
+
+const getInitialWebsites = async () => {
+  try {
+    const apiRes=await axios.get('/api/websites/listing')
+    return apiRes?.data
+  } catch (error) {
+    
   }
 }
-  useEffect(() => {
-    getInitialBlogs()
-  }, []);
+
+
+useEffect(() => {
+  const fetchAllData = async () => {
+    try {
+      const [blogsRes, websitesRes, emailsRes] = await Promise.all([
+        axios.get("/api/blogs?limit=6"),
+        getInitialWebsites(),
+        getInitialEmails()
+      ]);
+
+      setBlogListing(prev => ({
+        ...prev,
+        data: blogsRes?.data?.data
+      }));
+      setWebsiteListing(websitesRes);
+      setEmailListing(emailsRes);
+
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchAllData();
+}, []);
+  
   // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // useEffect(() => {
@@ -187,7 +219,7 @@ const getInitialBlogs = async () => {
 
   return (
     
-    <div className="min-h-screen bg-[#0F0F1A] text-white overflow-hidden">
+    <div className="min-h-screen grid grid-cols-1 bg-[#0F0F1A] text-white overflow-hidden">
       {/* Custom cursor */}
       {/* <motion.div 
         className="fixed w-8 h-8 rounded-full border-2 border-[#FF00FF] mix-blend-difference pointer-events-none z-50 hidden md:block"
@@ -762,7 +794,7 @@ const getInitialBlogs = async () => {
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" className="py-20 px-6 md:px-15 lg:px-55">
+        <section id="portfolio" className="py-20 px-6 md:px-15 lg:px-55 w-full max-w-[100vw] overflow-x-hidden">
           <div className="container mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -789,123 +821,29 @@ const getInitialBlogs = async () => {
             <Tabs defaultValue="blogs" className="w-full px-2">
               <div className="flex justify-center mb-8 z-10">
                 <TabsList className="bg-[#ffffff10] rounded-3xl   border border-[#ffffff20]">
-                  {/* <TabsTrigger
-                    value="all"
-                    className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
-                  >
-                    All
-                  </TabsTrigger> */}
-                  <TabsTrigger
-                    value="blogs"
-                    className="cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
-                  >
-                    Blogs
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="websites"
-                    className="cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
-                  >
-                    Websites
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="emails"
-                    className="cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
-                  >
-                    Emails
-                  </TabsTrigger>
+                  
+                <TabsTrigger
+              value="blogs"
+              className="cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
+            >
+              Blogs
+            </TabsTrigger>
+            <TabsTrigger
+              value="emails"
+              className="cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
+            >
+              Emails
+            </TabsTrigger>
+            <TabsTrigger
+              value="websites"
+              className="cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white"
+            >
+              Websites
+            </TabsTrigger>
                 </TabsList>
               </div>
 
-              {/* <TabsContent value="all" className="mt-0">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {[
-                    {
-                      title: "How to Optimize Your Content for SEO",
-                      category: "Blog Article",
-                      client: "TechCorp",
-                      image:
-                        "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg",
-                    },
-                    {
-                      title: "E-commerce Product Descriptions",
-                      category: "Website Copy",
-                      client: "Fashion Brand",
-                      image:
-                        "https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg",
-                    },
-                    {
-                      title: "Email Nurture Sequence",
-                      category: "Email Campaign",
-                      client: "SaaS Company",
-                      image:
-                        "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg",
-                    },
-                    {
-                      title: "Ultimate Guide to Content Marketing",
-                      category: "Ebook",
-                      client: "Marketing Agency",
-                      image:
-                        "https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg",
-                    },
-                    {
-                      title: "Social Media Content Calendar",
-                      category: "Social Media",
-                      client: "Retail Brand",
-                      image:
-                        "https://images.pexels.com/photos/3182781/pexels-photo-3182781.jpeg",
-                    },
-                    {
-                      title: "Company About Page Rewrite",
-                      category: "Website Copy",
-                      client: "Consulting Firm",
-                      image:
-                        "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg",
-                    },
-                  ].map((project, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: i * 0.1 }}
-                      viewport={{ once: true }}
-                      className="group relative overflow-hidden rounded-xl border border-[#ffffff20]"
-                    >
-                      <div className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 z-0"></div>
-                      <div className="aspect-[4/3] w-full overflow-hidden relative z-10">
-                        <Image
-                          src={project.image || "/placeholder.svg"}
-                          alt={project.title}
-                          width={600}
-                          height={400}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F1A] via-[#0F0F1A]/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                      <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <div className="text-sm font-medium text-[#00FFFF] mb-2">
-                          {project.category}
-                        </div>
-                        <h3 className="text-xl font-bold mb-1 text-white">
-                          {project.title}
-                        </h3>
-                        <p className="text-[#ffffffcc] mb-4">
-                          Client: {project.client}
-                        </p>
-                        <Button
-                          size="sm"
-                          className="relative group overflow-hidden w-fit"
-                        >
-                          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-100 group-hover:opacity-80 transition-opacity duration-300"></span>
-                          <span className="relative z-10 text-white">
-                            View Project
-                          </span>
-                          <ArrowRight className="relative z-10 ml-2 h-4 w-4 text-white" />
-                        </Button>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </TabsContent> */}
+             
 
               <TabsContent value="blogs" className="mt-0">
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -916,20 +854,26 @@ const getInitialBlogs = async () => {
               </TabsContent>
 
               {/* Similar structure for other tabs */}
-              <TabsContent value="websites" className="mt-0">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {/* Website projects */}
-                </div>
-              </TabsContent>
+              <TabsContent value="websites" className="mt-0 ">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {websiteListing?.data?.length
+              ? websiteListing?.data?.map((website: any, i: number) => (
+                  <WebsiteCard key={i} website={website} index={i} />
+                ))
+              : ""}
+          </div>
+        </TabsContent>
 
-              <TabsContent value="emails" className="mt-0">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                  {/* Email projects */}
-                </div>
-              </TabsContent>
+        <TabsContent value="emails" className="mt-0 ">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {emailListing?.data?.length
+              ? emailListing?.data?.map((email: any, i: number) => <EmailCard key={i} email={email} index={i} />)
+              : ""}
+          </div>
+        </TabsContent>
             </Tabs>
 
-            <div className="flex justify-center mt-12">
+            {/* <div className="flex justify-center mt-12">
               <Button
                 variant="outline"
                 size="lg"
@@ -938,7 +882,7 @@ const getInitialBlogs = async () => {
                 View All Projects
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </div>
+            </div> */}
           </div>
         </section>
 
@@ -1680,135 +1624,4 @@ const getInitialBlogs = async () => {
     </div>
     
   );
-}
-interface Project {
-  title: string
-  slug: string
-  excerpt: string
-  coverImage: string
-  tags: string[]
-
-}
-function BlogCard({ project, index }: { project: Project; index: number }) {
-  const [isHovered, setIsHovered] = useState(false)
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="group relative overflow-hidden rounded-xl"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Enhanced gradient border effect */}
-      <motion.div
-        className="absolute -inset-1 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] rounded-xl blur-xl z-0"
-        animate={{
-          opacity: isHovered ? 0.6 : 0,
-          scale: isHovered ? 1.05 : 1,
-        }}
-        transition={{ duration: 0.4 }}
-      />
-
-      {/* Image container */}
-      <div className="aspect-[4/3] w-full overflow-hidden relative z-10">
-        <motion.div
-          animate={{
-            scale: isHovered ? 1.08 : 1,
-          }}
-          transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-          className="h-full w-full"
-        >
-          <Image
-            src={project?.coverImage || "/placeholder.svg"}
-            alt={project?.title}
-            width={600}
-            height={400}
-            className="h-full w-full object-cover"
-          />
-        </motion.div>
-      </div>
-
-      {/* Enhanced overlay with animated reveal */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-t from-[#313146] via-[#0F0F1A]/80 to-transparent z-20"
-        animate={{
-          opacity: isHovered ? 1 : 0,
-          y: isHovered ? 0 : 20,
-        }}
-        transition={{ duration: 0.3 }}
-      />
-
-      {/* Content container with animated reveal */}
-      <motion.div
-        className="absolute inset-0 flex flex-col justify-end p-4 z-30"
-        animate={{
-          opacity: isHovered ? 1 : 0,
-          y: isHovered ? 0 : 10,
-        }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-      >
-        {/* Category badge with glow effect */}
-        <div className="flex flex-wrap gap-2 mb-2">
-          {project?.tags?.map((tag, i) => (
-            <motion.div
-              key={i}
-              className="text-xs font-medium bg-gradient-to-r from-[#FF00FF] to-[#e273c195] rounded-full px-2.5 py-1"
-              animate={{
-          opacity: isHovered ? 1 : 0,
-          x: isHovered ? 0 : -10,
-              }}
-              transition={{ duration: 0.3, delay: 0.1 + i * 0.1 }}
-              style={{
-          textShadow: "0 0 8px rgba(0, 255, 255, 0.5)",
-              }}
-            >
-              {tag}
-            </motion.div>
-          ))}
-        </div>
-        
-        {/* <motion.div
-          className="text-sm font-medium text-[#00FFFF] mb-2"
-          animate={{
-            x: isHovered ? 0 : -10,
-            opacity: isHovered ? 1 : 0,
-          }}
-          transition={{ duration: 0.3, delay: 0.15 }}
-          style={{
-            textShadow: "0 0 8px rgba(0, 255, 255, 0.5)",
-          }}
-        >
-          {"Blog"}
-        </motion.div> */}
-
-        
-
-        {/* Link button with enhanced animation */}
-        <Link href={`/blog/${project?.slug}`} passHref>
-          <motion.div
-            animate={{
-              y: isHovered ? 0 : 20,
-              opacity: isHovered ? 1 : 0,
-            }}
-            transition={{ duration: 0.3, delay: 0.25 }}
-          >
-            {/* Title with animated reveal */}
-        <motion.h3
-          className="text-sm font-bold mb-1 text-white"
-          animate={{
-            y: isHovered ? 0 : 15,
-            opacity: isHovered ? 1 : 0,
-          }}
-          transition={{ duration: 0.3, delay: 0.2 }}
-        >
-          {project?.title} <ArrowRight className="h-4 w-4 inline-block" />
-        </motion.h3>
-          </motion.div>
-        </Link>
-      </motion.div>
-    </motion.div>
-  )
 }

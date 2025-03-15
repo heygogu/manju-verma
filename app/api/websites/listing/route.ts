@@ -1,28 +1,16 @@
 
-
-import mongoose from "mongoose";
-import Blog from "@/app/models/BlogPost";
 import connectToDatabase from "@/app/utils/db";
+import Website from "@/app/models/Website";
 
 export async function GET(req: Request) {
   try {
     // Connect to database
     await connectToDatabase();
     
-    // Debug mongoose connection state
-    console.log("MongoDB Connection State:", mongoose.connection.readyState);
-    // 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
-    
-    if (mongoose.connection.readyState !== 1) {
-      throw new Error(`MongoDB not connected, state: ${mongoose.connection.readyState}`);
-    }
-
-    // Log available models
-    console.log("Registered Models:", Object.keys(mongoose.models));
-    
+ 
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get("page")) || 1;
-    const limit = Number(searchParams.get("limit")) || 10;
+    const limit = Number(searchParams.get("limit")) || 6;
     const search = searchParams.get("search") || "";
 
     // Calculate pagination offset
@@ -33,7 +21,7 @@ export async function GET(req: Request) {
       ? {
           $or: [
             { title: { $regex: search, $options: "i" } }, 
-            { content: { $regex: search, $options: "i" } },
+            { clientName: { $regex: search, $options: "i" } },
           ],
         }
       : {};
@@ -41,22 +29,20 @@ export async function GET(req: Request) {
     console.log("Executing MongoDB query with:", { searchQuery, skip, limit });
     
     // Fetch blogs with pagination
-    const blogs = await Blog.find(searchQuery)
+    const websites = await Website.find(searchQuery)
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
       .lean();
 
-   
 
     return Response.json({
-      data: blogs,
-    
+      data: websites,
     });
   } catch (error) {
-    console.error("Error fetching blogs:", error);
+    console.error("Error fetching websites:", error);
     return Response.json({ 
-      error: "Failed to fetch blogs", 
+      error: "Failed to fetch websites", 
       details: error instanceof Error ? error.message : String(error)
     }, { status: 500 });
   }
