@@ -110,7 +110,7 @@ interface Project {
           
   
           {/* Link button with enhanced animation */}
-          <Link href={`/blog/${project?.slug}`} passHref>
+          <Link target="_blank" href={`/blog/${project?.slug}`} passHref>
             <motion.div
               animate={{
                 y: isHovered ? 0 : 20,
