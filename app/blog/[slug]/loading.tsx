@@ -2,7 +2,7 @@
 import {motion} from "framer-motion";
 export default function Loading(){
     return (
-      <div>
+      <div className="min-h-screen bg-[#0F0F1A] overflow-hidden">
         <motion.div
           className="h-[calc(100vh-10vh)] flex z-50 items-center justify-center"
           initial={{ opacity: 0 }}
