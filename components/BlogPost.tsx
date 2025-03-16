@@ -1,15 +1,47 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useScroll } from "framer-motion";
+
+import { motion } from "framer-motion";
 import { Calendar, Clock, Eye, Tag } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
-import PageContainer from "./page-container";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useScroll } from "framer-motion";
 
-const BlogPost = ({ post }: any) => {
+type BlogPost = {
+  data: {
+    content: string;
+    coverImage: string;
+    publishDate: string;
+    tags: string[];
+    title: string;
+    updatedAt: string;
+    views: number;
+    author: string;
+    excerpt?: string;
+  };
+};
+
+export default function BlogPostContent({ post }: { post: BlogPost }) {
   if (!post?.data) return null;
+
   const { scrollYProgress } = useScroll();
+  const [scaleX, setScaleX] = useState(0);
+
+  useEffect(() => {
+    const updateScaleX = () => {
+      setScaleX(scrollYProgress.get());
+    };
+
+    updateScaleX();
+
+    const unsubscribe = scrollYProgress.onChange(updateScaleX);
+
+    return () => {
+      unsubscribe();
+    };
+  }, [scrollYProgress]);
+
   const {
     content,
     coverImage,
@@ -19,7 +51,8 @@ const BlogPost = ({ post }: any) => {
     updatedAt,
     views,
     author,
-  } = post?.data;
+  } = post.data;
+
   // Format dates
   const publishedDate = new Date(publishDate);
   const formattedPublishDate = publishedDate.toLocaleDateString("en-US", {
@@ -55,14 +88,18 @@ const BlogPost = ({ post }: any) => {
   };
 
   return (
-    <div className=" bg-[#0F0F1A] ">
+    <div className="bg-[#0F0F1A]">
       {/* Progress bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#FF00FF] z-10"
-        style={{ scaleX: scrollYProgress }}
+        style={{ scaleX: scaleX }}
       />
+
       {/* Background elements */}
-      <div className="fixed left-0 right-0 top-[calc(100vh-65vh)]" style={{ zIndex: 0 }}>
+      <div
+        className="fixed left-0 right-0 top-[calc(100vh-65vh)]"
+        style={{ zIndex: 0 }}
+      >
         <div className="absolute top-0 left-0 w-full h-full bg-[#0F0F1A] opacity-90" />
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-[10%] left-[20%] w-64 h-64 rounded-full bg-[#FF00FF] filter blur-[100px] opacity-20 animate-pulse" />
@@ -77,7 +114,7 @@ const BlogPost = ({ post }: any) => {
         </div>
       </div>
 
-      <main className="container mx-auto px-4 py-8 z-50 max-w-4xl">
+      <main className="container mx-auto px-4 py-8 z-50 max-w-4xl relative">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -86,12 +123,12 @@ const BlogPost = ({ post }: any) => {
         >
           {/* Hero Section */}
           <motion.div variants={itemVariants} className="relative">
-            <div className="rounded-2xl overflow-hidden aspect-video  relative shadow-xl">
+            <div className="rounded-2xl overflow-hidden aspect-video relative shadow-xl">
               <Image
-                src={coverImage}
+                src={coverImage || "/placeholder.svg"}
                 alt={title}
                 fill
-                className="object-cover transition-transform rounded-2xl  duration-700 hover:scale-105"
+                className="object-cover transition-transform rounded-2xl duration-700 hover:scale-105"
                 priority
               />
             </div>
@@ -112,7 +149,7 @@ const BlogPost = ({ post }: any) => {
           </motion.div>
 
           {/* Post Meta */}
-          <motion.div variants={itemVariants} className="space-y-4 ">
+          <motion.div variants={itemVariants} className="space-y-4">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold z-50 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
               {title}
             </h1>
@@ -147,7 +184,7 @@ const BlogPost = ({ post }: any) => {
           {/* Article Content */}
           <motion.div
             variants={itemVariants}
-            className="prose prose-lg max-w-none prose-invert text-white  z-50 prose-headings:text-white prose-a:text-white "
+            className="prose prose-lg max-w-none prose-invert text-white z-50 prose-headings:text-white prose-a:text-white"
             dangerouslySetInnerHTML={{ __html: content }}
           />
 
@@ -162,19 +199,19 @@ const BlogPost = ({ post }: any) => {
             <div className="flex flex-wrap gap-2">
               {tags?.map((tag: string, index: number) => (
                 <motion.div key={index}>
-                  <Link
+                  {/* <Link
                     href={`/tag/${tag?.toLowerCase().replace(/\s+/g, "-")}`}
                     className="inline-block"
-                  >
+                  > */}
                     <motion.span
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="bg-gray-800   text-gray-300 px-4 py-2 rounded-full transition duration-200 inline-flex items-center"
+                      className="bg-gray-800 text-gray-300 px-4 py-2 rounded-full transition duration-200 inline-flex items-center"
                     >
                       <Tag size={14} className="mr-1 z-50" />
                       {tag}
                     </motion.span>
-                  </Link>
+                  {/* </Link> */}
                 </motion.div>
               ))}
             </div>
@@ -183,6 +220,4 @@ const BlogPost = ({ post }: any) => {
       </main>
     </div>
   );
-};
-
-export default BlogPost;
+}
