@@ -17,7 +17,7 @@ export async function GET() {
 
   // Fetch dynamic blog posts
   const blogs = await getBlogsFromDatabase();
-  const blogUrls = blogs.map((blog:any) => `/blog/${blog?.slug}`);
+  const blogUrls = blogs?.map((blog:any) => `/blog/${blog?.slug}`);
 
   // Generate sitemap XML
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
