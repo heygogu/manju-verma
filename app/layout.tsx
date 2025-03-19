@@ -20,8 +20,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Manju Verma",
-  description: "Tech Content Writer",
+  title: "Hire the Best Content Writer for IT & Marketing | Manju Verma",
+  description:
+    "Looking for a top-notch content writer? Get high-quality, SEO-optimized content for IT & Digital Marketing from Manju Verma.",
   icons: {
     icon: Favicon.src,
   },
