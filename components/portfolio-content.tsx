@@ -190,7 +190,7 @@ export default function PortfolioContent({
             {["About", "Services", "Portfolio", "Testimonials", "Contact"].map(
               (item, i) => (
                 <Link
-                aria-label="Navigation"
+                  aria-label="Navigation"
                   key={i}
                   href={`#${item.toLowerCase()}`}
                   className="text-sm font-medium relative group"
@@ -211,9 +211,10 @@ export default function PortfolioContent({
               transition={{ duration: 0.5 }}
             >
               <Button
-              aria-label="Let's Talk"
-              role="navigation"
-              className="relative cursor-pointer hidden md:flex  group overflow-hidden bg-transparent border border-[#ffffff30] hover:border-[#ffffff60]">
+                aria-label="Let's Talk"
+                role="navigation"
+                className="relative cursor-pointer hidden md:flex  group overflow-hidden bg-transparent border border-[#ffffff30] hover:border-[#ffffff60]"
+              >
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 <span className="relative  z-10">Let&apos;s Talk</span>
                 <ArrowRight className="relative z-10 ml-2 h-4 w-4" />
@@ -221,8 +222,8 @@ export default function PortfolioContent({
             </motion.div>
 
             <Button
-             aria-label="Mobile Menu"
-             role="navigation"
+              aria-label="Mobile Menu"
+              role="navigation"
               className="block md:hidden cursor-pointer"
               onClick={() => setMobileMenuOpen(true)}
             >
@@ -259,7 +260,7 @@ export default function PortfolioContent({
                 </span>
               </div>
               <Button
-              aria-label="Close Menu"
+                aria-label="Close Menu"
                 role="navigation"
                 className="cursor-pointer"
                 onClick={() => setMobileMenuOpen(false)}
@@ -277,7 +278,7 @@ export default function PortfolioContent({
                 "Contact",
               ].map((item, i) => (
                 <Link
-                aria-label="Mobile Navigation"
+                  aria-label="Mobile Navigation"
                   key={i}
                   href={`#${item.toLowerCase()}`}
                   className="text-white hover:text-[#00FFFF] transition-colors duration-300"
@@ -290,9 +291,10 @@ export default function PortfolioContent({
 
             <div className="mt-auto">
               <Button
-              aria-label="Let's Talk"
-              role="navigation"
-              className="w-full cursor-pointer relative group overflow-hidden bg-transparent border border-[#ffffff30]">
+                aria-label="Let's Talk"
+                role="navigation"
+                className="w-full cursor-pointer relative group overflow-hidden bg-transparent border border-[#ffffff30]"
+              >
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 <span className="relative z-10">Let&apos;s Talk</span>
                 <ArrowRight className="relative z-10 ml-2 h-4 w-4" />
@@ -365,17 +367,25 @@ export default function PortfolioContent({
                     </span>
                     <ArrowRight className="relative z-10 ml-2 h-4 w-4 text-white" />
                   </Button>
-                  <Link passHref href={"/Manju_Verma.pdf"}  download>
-                  <Button
+                  <Link
                     aria-label="Download Resume"
-                    role="navigation"
-                    size="lg"
-                    variant="outline"
-                    className="border-[#ffffff30] cursor-pointer hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300"
+                    href={"/MANJU_VERMA.pdf"}
+                    rel="noopener noreferrer"
+                    passHref
+                    locale={false}
+                    download
+                  >
+                    <Button
+                      aria-label="Download Resume"
+                      role="navigation"
+                      size="lg"
+                      variant="outline"
+                     
+                      className="border-[#ffffff30] w-full cursor-pointer hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300"
                     >
-                    Download Resume
-                  </Button>
-                    </Link>
+                      Download Resume
+                    </Button>
+                  </Link>
                 </div>
                 <div className="flex items-center gap-4 mt-6">
                   <div className="flex -space-x-3">
@@ -599,21 +609,29 @@ export default function PortfolioContent({
 
                 <div className="flex flex-col sm:flex-row gap-4 mt-6">
                   <Button
-                  aria-label="Contact Me"
+                    aria-label="Contact Me"
                     role="navigation"
-                  className="relative cursor-pointer group overflow-hidden">
+                    className="relative cursor-pointer group overflow-hidden"
+                  >
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-100 group-hover:opacity-80 transition-opacity duration-300"></span>
                     <span className="relative z-10 text-white">Contact Me</span>
                     <ArrowRight className="relative z-10 ml-2 h-4 w-4 text-white" />
                   </Button>
-                   <Link passHref href={"/Manju_Verma.pdf"}  download>
-                  <Button
-                    variant="outline"
-                    className="border-[#ffffff30] cursor-pointer hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300"
+                  <Link
+                    aria-label="Download CV"
+                    passHref
+                    href={"/MANJU_VERMA.pdf"}
+                    rel="noopener noreferrer"
+                    locale={false}
+                    download
                   >
-                    Download CV
-                  </Button>
-                    </Link>
+                    <Button
+                      variant="outline"
+                      className="border-[#ffffff30] w-full cursor-pointer hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300"
+                    >
+                      Download CV
+                    </Button>
+                  </Link>
                 </div>
               </motion.div>
             </div>
@@ -712,7 +730,7 @@ export default function PortfolioContent({
                       {service.description}
                     </p>
                     <Link
-                    aria-label="Learn More"
+                      aria-label="Learn More"
                       href="#"
                       className="inline-flex text-sm items-center text-[#00FFFF] font-medium group-hover:text-[#FF00FF] transition-colors duration-300"
                     >
@@ -987,7 +1005,7 @@ export default function PortfolioContent({
                               </div>
                               {testimonial?.isCompany && (
                                 <Link
-                                aria-label="Company URL"
+                                  aria-label="Company URL"
                                   href={testimonial?.companyUrl}
                                   target="_blank"
                                   className="text-sm text-[#00FFFF] hover:text-[#FF00FF] transition-colors mt-1"
@@ -1063,8 +1081,8 @@ export default function PortfolioContent({
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 mt-4">
                     <Button
-                    aria-label="Get Started"
-                        role="navigation"
+                      aria-label="Get Started"
+                      role="navigation"
                       size="lg"
                       className="cursor-pointer relative group overflow-hidden"
                     >
@@ -1262,7 +1280,7 @@ export default function PortfolioContent({
                           <div className="font-medium text-white">
                             {/* <Link href="#" className="text-[#00FFFF] hover:text-[#FF00FF] transition-colors">Twitter</Link> */}
                             <Link
-                            aria-label="Twitter"
+                              aria-label="Twitter"
                               target="_blank"
                               href="https://www.linkedin.com/in/manju-verma-111b8518b/"
                               className="h-6 w-6   flex items-center justify-center rounded-full bg-[#ffffff10] hover:bg-[#ffffff20] transition-colors group"
@@ -1363,7 +1381,7 @@ export default function PortfolioContent({
               <ul className="space-y-2 text-md">
                 <li>
                   <Link
-                  aria-label="About"
+                    aria-label="About"
                     href="#about"
                     className="text-[#ffffffcc] hover:text-[#00FFFF] transition-colors"
                   >
@@ -1372,7 +1390,7 @@ export default function PortfolioContent({
                 </li>
                 <li>
                   <Link
-                  aria-label="Services"
+                    aria-label="Services"
                     href="#services"
                     className="text-[#ffffffcc] hover:text-[#00FFFF] transition-colors"
                   >
@@ -1381,7 +1399,7 @@ export default function PortfolioContent({
                 </li>
                 <li>
                   <Link
-                  aria-label="Portfolio"
+                    aria-label="Portfolio"
                     href="#portfolio"
                     className="text-[#ffffffcc] hover:text-[#00FFFF] transition-colors"
                   >
@@ -1390,7 +1408,7 @@ export default function PortfolioContent({
                 </li>
                 <li>
                   <Link
-                  aria-label="Contact"
+                    aria-label="Contact"
                     href="#contact"
                     className="text-[#ffffffcc] hover:text-[#00FFFF] transition-colors"
                   >
@@ -1406,7 +1424,7 @@ export default function PortfolioContent({
               <ul className="space-y-2 text-md">
                 <li>
                   <Link
-                  aria-label="Blog Writing"
+                    aria-label="Blog Writing"
                     href="#"
                     className="text-[#ffffffcc] hover:text-[#00FFFF] transition-colors"
                   >
@@ -1466,7 +1484,7 @@ export default function PortfolioContent({
                   </svg>
                 </Link>
                 <Link
-                aria-label="Instagram"
+                  aria-label="Instagram"
                   href="#"
                   className="h-10 w-10 flex items-center justify-center rounded-full bg-[#ffffff10] hover:bg-[#ffffff20] transition-colors group"
                 >
@@ -1486,7 +1504,7 @@ export default function PortfolioContent({
                   </svg>
                 </Link>
                 <Link
-                aria-label="LinkedIn"
+                  aria-label="LinkedIn"
                   href="#"
                   className="h-10 w-10 flex items-center justify-center rounded-full bg-[#ffffff10] hover:bg-[#ffffff20] transition-colors group"
                 >
@@ -1515,7 +1533,7 @@ export default function PortfolioContent({
                   </svg>
                 </Link>
                 <Link
-                aria-label="LinkedIn"
+                  aria-label="LinkedIn"
                   target="_blank"
                   href="https://www.linkedin.com/in/manju-verma-111b8518b/"
                   className="h-10 w-10 flex items-center justify-center rounded-full bg-[#ffffff10] hover:bg-[#ffffff20] transition-colors group"
@@ -1556,8 +1574,8 @@ export default function PortfolioContent({
         className="fixed bottom-6 right-6 z-50"
       >
         <Button
-        aria-label="Scroll to Top"
-            role="button"
+          aria-label="Scroll to Top"
+          role="button"
           size="icon"
           onClick={() => window?.scrollTo({ top: 0, behavior: "smooth" })}
           className="h-12 w-12 rounded-full shadow-lg relative group overflow-hidden"
