@@ -365,15 +365,17 @@ export default function PortfolioContent({
                     </span>
                     <ArrowRight className="relative z-10 ml-2 h-4 w-4 text-white" />
                   </Button>
+                  <Link passHref href={"/Manju_Verma.pdf"}  download>
                   <Button
                     aria-label="Download Resume"
                     role="navigation"
                     size="lg"
                     variant="outline"
                     className="border-[#ffffff30] cursor-pointer hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300"
-                  >
+                    >
                     Download Resume
                   </Button>
+                    </Link>
                 </div>
                 <div className="flex items-center gap-4 mt-6">
                   <div className="flex -space-x-3">
@@ -604,12 +606,14 @@ export default function PortfolioContent({
                     <span className="relative z-10 text-white">Contact Me</span>
                     <ArrowRight className="relative z-10 ml-2 h-4 w-4 text-white" />
                   </Button>
+                   <Link passHref href={"/Manju_Verma.pdf"}  download>
                   <Button
                     variant="outline"
                     className="border-[#ffffff30] cursor-pointer hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300"
                   >
                     Download CV
                   </Button>
+                    </Link>
                 </div>
               </motion.div>
             </div>

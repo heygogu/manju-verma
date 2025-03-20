@@ -1,10 +1,8 @@
 "use client";
-
 import { motion } from "framer-motion";
 import { Calendar, Clock, Eye, Tag } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useScroll } from "framer-motion";
 
