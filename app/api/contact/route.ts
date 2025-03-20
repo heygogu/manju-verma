@@ -3,13 +3,14 @@ import Contact from "@/app/models/Contact";
 import type { NextRequest } from 'next/server';
 import {Resend} from 'resend'
 
-const RESEND_API_KEY = process.env.NEXT_PUBLIC_RESEND_API_KEY!; // Store your API key securely
 
 // Resend email function
 async function sendEmailFromUserToAdmin(name: string, email: string, subject: string, message: string) {
   try {
     // Send an email using Resend API
-    const resend = new Resend(RESEND_API_KEY);
+    
+      
+    const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY!);
     resend.emails.send(
       
       {
@@ -101,7 +102,7 @@ async function sendEmailFromUserToAdmin(name: string, email: string, subject: st
         </p>
         </div>
     </div>
-        `, // HTML content for the email
+        `, 
       },
       
     );
