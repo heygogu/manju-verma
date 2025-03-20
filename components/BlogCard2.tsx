@@ -28,7 +28,7 @@ export default function BlogCard({ project, index }: BlogProps) {
       whileHover={{ y: -10, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Link href={`/portfolio/blogs/${project._id}`}>
+      <Link aria-label="blog card" href={`/portfolio/blogs/${project._id}`}>
         <Card className="overflow-hidden h-full border border-[#ffffff20] bg-[#ffffff08] backdrop-blur-sm hover:shadow-[0_0_15px_rgba(255,0,255,0.3)] transition-all duration-300">
           <div className="relative h-48 overflow-hidden">
             <Image

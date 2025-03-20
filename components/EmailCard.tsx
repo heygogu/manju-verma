@@ -35,7 +35,7 @@ export default function EmailCard({ email, index }: EmailProps) {
         whileHover={{ y: -10, transition: { duration: 0.2 } }}
         className="h-full w-full"
       >
-        <Link href={`/emails/${email._id}`} className="block w-full">
+        <Link aria-label="email card" href={`/emails/${email._id}`} className="block w-full">
           <Card className="overflow-hidden pt-0 pb-6 h-full border border-[#ffffff20] bg-[#ffffff08] backdrop-blur-sm hover:shadow-[0_0_15px_rgba(0,255,255,0.3)] transition-all duration-300">
             <div className="relative h-48 overflow-hidden">
               <Image

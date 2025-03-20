@@ -110,7 +110,7 @@ interface Project {
           
   
           {/* Link button with enhanced animation */}
-          <Link target="_blank" href={`/blog/${project?.slug}`} passHref>
+          <Link aria-label="blog title" target="_blank" href={`/blog/${project?.slug}`} passHref>
             <motion.div
               animate={{
                 y: isHovered ? 0 : 20,

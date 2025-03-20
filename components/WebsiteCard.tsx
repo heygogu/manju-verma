@@ -30,7 +30,7 @@ export default function WebsiteCard({ website, index }: WebsiteProps) {
       whileHover={{ y: -10, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Link href={`/websites/${website._id}`}>
+      <Link aria-label="website card" href={`/websites/${website._id}`}>
         <Card className="overflow-hidden pt-0 pb-6 h-full border border-[#ffffff20] bg-[#ffffff08] backdrop-blur-sm hover:shadow-[0_0_15px_rgba(255,0,255,0.3)] transition-all duration-300 w-full">
           <div className="relative h-48 overflow-hidden">
             <Image

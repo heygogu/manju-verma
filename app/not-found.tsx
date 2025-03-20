@@ -82,7 +82,7 @@ export default function NotFound() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
-          <Link href="/">
+          <Link aria-label="go back" href="/">
             <motion.button
               className="px-8 py-3 bg-white text-[#0F0F1A] rounded-lg font-bold flex items-center space-x-2 shadow-lg group hover:bg-opacity-90 transition duration-300"
               whileHover={{ scale: 1.05 }}
@@ -93,7 +93,9 @@ export default function NotFound() {
             </motion.button>
           </Link>
 
-          <Link href="/">
+          <Link
+          aria-label="go to homepage"
+          href="/">
             <motion.button
               className="px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-bold flex items-center space-x-2 group  hover:bg-opacity-10 transition duration-300"
               whileHover={{ scale: 1.05 }}

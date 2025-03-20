@@ -53,7 +53,9 @@ export default function WebsiteDetailPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
         <h1 className="text-2xl font-bold mb-4">Website not found</h1>
-        <Button onClick={() => router.back()}>Go Back</Button>
+        <Button aria-label="Return to previous page"
+         role="navigation"
+        onClick={() => router.back()}>Go Back</Button>
       </div>
     )
   }
@@ -72,6 +74,8 @@ export default function WebsiteDetailPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
         <div className="absolute top-4 left-4">
           <Button
+            aria-label="Return to previous page"
+            role="navigation"
             variant="outline"
             size="icon"
             onClick={() => router.back()}
