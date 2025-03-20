@@ -56,6 +56,15 @@ export async function generateMetadata(
       title: post?.data?.title,
       description: post?.data?.excerpt || "Read our latest blog post",
       images: [post?.data?.coverImage],
+      // creator: post?.data?.author,
+      // site: "@manjuverma",
+    },
+    alternates: {
+      canonical: `https://manjuverma.com/blog/${slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

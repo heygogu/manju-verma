@@ -22,9 +22,48 @@ type BlogPost = {
   };
 };
 
+// Add this to your BlogPostContent component
+export function BlogJsonLd({ post }:any) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": post.coverImage,
+    "datePublished": post.publishDate,
+    "dateModified": post.updatedAt || post.publishDate,
+    "author": {
+      "@type": "Person",
+      "name": post.author,
+      "url": "https://manjuverma.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Manju Verma",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://manjuverma.com/"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://manjuverma.com/blog/${post.slug}`
+    },
+    "keywords": post.tags.join(", ")
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
 export default function BlogPostContent({ post }: { post: BlogPost }) {
   if (!post?.data) return null;
 
+  
+  
   const { scrollYProgress } = useScroll();
   const [scaleX, setScaleX] = useState(0);
 
@@ -90,6 +129,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
   return (
     <div className="bg-[#0F0F1A]">
       {/* Progress bar */}
+      <BlogJsonLd post={post.data} />
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#FF00FF] z-10"
         style={{ scaleX: scaleX }}
@@ -130,6 +170,8 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                 fill
                 className="object-cover transition-transform rounded-2xl duration-700 hover:scale-105"
                 priority
+                placeholder="blur"
+                blurDataURL="/placeholder.svg"
               />
             </div>
 
