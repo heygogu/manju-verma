@@ -6,16 +6,16 @@ async function getInitialData() {
   try {
     const [blogsRes, websitesRes, emailsRes, testimonialRes] =
       await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/blogs?limit=6`, {
+        fetch(`${process.env.NEXT_PUBLIC_DEV_BASE_URL || ""}/api/blogs?limit=6`, {
           cache: "no-store",
         }),
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/websites/listing`, {
+        fetch(`${process.env.NEXT_PUBLIC_DEV_BASE_URL || ""}/api/websites/listing`, {
           cache: "no-store",
         }),
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/emails/listing`, {
+        fetch(`${process.env.NEXT_PUBLIC_DEV_BASE_URL || ""}/api/emails/listing`, {
           cache: "no-store",
         }),
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/testimonials`, {
+        fetch(`${process.env.NEXT_PUBLIC_DEV_BASE_URL || ""}/api/testimonials`, {
           cache: "no-store",
         }),
       ]);
