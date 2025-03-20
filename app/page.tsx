@@ -1,22 +1,22 @@
 import { Suspense } from "react";
 import PortfolioContent from "@/components/portfolio-content";
 import PageLoader from "@/components/PageLoader2";
-
+export const dynamic = "force-dynamic";
 async function getInitialData() {
   try {
     const [blogsRes, websitesRes, emailsRes, testimonialRes] =
       await Promise.all([
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}api/blogs?limit=6`, {
-          cache: "no-store",
+          next: { revalidate: 5000 },
         }),
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}api/websites/listing`, {
-          cache: "no-store",
+          next: { revalidate: 5000 },
         }),
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}api/emails/listing`, {
-          cache: "no-store",
+          next: { revalidate: 5000 },
         }),
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}api/testimonials`, {
-          cache: "no-store",
+          next: { revalidate: 5000 },
         }),
       ]);
 
