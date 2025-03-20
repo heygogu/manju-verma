@@ -7,7 +7,7 @@ import BlogPostContent from "@/components/BlogPost";
 async function getBlogPostBySlug(slug: string) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_DEV_BASE_URL || ""}/api/blogs/${slug}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL || ""}api/blogs/${slug}`,
       {
         next: { revalidate: 3600 },
       }

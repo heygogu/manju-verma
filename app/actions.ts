@@ -8,7 +8,7 @@ export async function submitContactForm(payload: {
     
     try {
       // Your existing server logic here (DB connection, email sending, etc.)
-      const response = await fetch(`${process.env.NEXT_PUBLIC_DEV_BASE_URL}/api/contact`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
