@@ -95,6 +95,7 @@ export default function PortfolioContent({
     initialData.testimonials
   );
 
+
   const submitForm = async (e: any) => {
     e.preventDefault();
 
@@ -371,7 +372,8 @@ export default function PortfolioContent({
                     aria-label="Download Resume"
                     href={"/MANJU_VERMA.pdf"}
                     rel="noopener noreferrer"
-                    passHref
+                    
+                    
                     locale={false}
                     download
                   >
@@ -380,7 +382,6 @@ export default function PortfolioContent({
                       role="navigation"
                       size="lg"
                       variant="outline"
-                     
                       className="border-[#ffffff30] w-full cursor-pointer hover:border-[#ffffff60] text-white hover:text-[#00FFFF] transition-colors duration-300"
                     >
                       Download Resume
