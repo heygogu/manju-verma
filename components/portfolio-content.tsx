@@ -370,12 +370,10 @@ export default function PortfolioContent({
                   </Button>
                   <Link
                     aria-label="Download Resume"
-                    href={"/MANJU_VERMA.pdf"}
+                    href={"/api/download-resume"}
                     rel="noopener noreferrer"
-                    
-                    
-                    locale={false}
-                    download
+                  
+                    target="_blank"
                   >
                     <Button
                       aria-label="Download Resume"
@@ -621,9 +619,9 @@ export default function PortfolioContent({
                   <Link
                     aria-label="Download CV"
                     passHref
-                    href={"/MANJU_VERMA.pdf"}
+                    href={"/api/download-resume"}
                     rel="noopener noreferrer"
-                    locale={false}
+                    
                     download
                   >
                     <Button
