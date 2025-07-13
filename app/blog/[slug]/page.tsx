@@ -9,7 +9,7 @@ async function getBlogPostBySlug(slug: string) {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL || ""}api/blogs/${slug}`,
       {
-        next: { revalidate: 3600 },
+        next: { revalidate: 0 },
       }
     );
 

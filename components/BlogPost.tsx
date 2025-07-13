@@ -5,6 +5,7 @@ import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useScroll } from "framer-motion";
+import { TipTapRenderer } from "./TipTapRenderer";
 
 type BlogPost = {
   data: {
@@ -21,7 +22,7 @@ type BlogPost = {
 };
 
 // Add this to your BlogPostContent component
-export function BlogJsonLd({ post }:any) {
+export function BlogJsonLd({ post }: any) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -33,26 +34,26 @@ export function BlogJsonLd({ post }:any) {
     "author": {
       "@type": "Person",
       "name": post.author,
-      "url": "https://manjuverma.com/"
+      "url": "https://manjuverma.com/",
     },
     "publisher": {
       "@type": "Organization",
       "name": "Manju Verma",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://manjuverma.com/"
-      }
+        "url": "https://manjuverma.com/",
+      },
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://manjuverma.com/blog/${post.slug}`
+      "@id": `https://manjuverma.com/blog/${post.slug}`,
     },
-    "keywords": post.tags.join(", ")
+    "keywords": post.tags.join(", "),
   };
 
   return (
     <script
-      type="application/ld+json"
+      type='application/ld+json'
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
   );
@@ -60,8 +61,6 @@ export function BlogJsonLd({ post }:any) {
 export default function BlogPostContent({ post }: { post: BlogPost }) {
   if (!post?.data) return null;
 
-  
-  
   const { scrollYProgress } = useScroll();
   const [scaleX, setScaleX] = useState(0);
 
@@ -125,62 +124,59 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
   };
 
   return (
-    <div className="bg-[#0F0F1A]">
+    <div className='bg-[#0F0F1A]'>
       {/* Progress bar */}
       <BlogJsonLd post={post.data} />
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#FF00FF] z-10"
+        className='fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FF00FF] via-[#00FFFF] to-[#FF00FF] z-10'
         style={{ scaleX: scaleX }}
       />
 
       {/* Background elements */}
       <div
-        className="fixed left-0 right-0 top-[calc(100vh-65vh)]"
-        style={{ zIndex: 0 }}
-      >
-        <div className="absolute top-0 left-0 w-full h-full bg-[#0F0F1A] opacity-90" />
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-[10%] left-[20%] w-64 h-64 rounded-full bg-[#FF00FF] filter blur-[100px] opacity-20 animate-pulse" />
+        className='fixed left-0 right-0 top-[calc(100vh-65vh)]'
+        style={{ zIndex: 0 }}>
+        <div className='absolute top-0 left-0 w-full h-full bg-[#0F0F1A] opacity-90' />
+        <div className='absolute top-0 left-0 w-full h-full'>
+          <div className='absolute top-[10%] left-[20%] w-64 h-64 rounded-full bg-[#FF00FF] filter blur-[100px] opacity-20 animate-pulse' />
           <div
-            className="absolute top-[40%] right-[10%] w-96 h-96 rounded-full bg-[#00FFFF] filter blur-[120px] opacity-20 animate-pulse"
+            className='absolute top-[40%] right-[10%] w-96 h-96 rounded-full bg-[#00FFFF] filter blur-[120px] opacity-20 animate-pulse'
             style={{ animationDelay: "1s" }}
           />
           <div
-            className="absolute bottom-[20%] left-[30%] w-80 h-80 rounded-full bg-[#9900FF] filter blur-[150px] opacity-20 animate-pulse"
+            className='absolute bottom-[20%] left-[30%] w-80 h-80 rounded-full bg-[#9900FF] filter blur-[150px] opacity-20 animate-pulse'
             style={{ animationDelay: "2s" }}
           />
         </div>
       </div>
 
-      <main className="container mx-auto px-4 py-8 z-50 max-w-4xl relative">
+      <main className='container mx-auto px-4 py-8 z-50 max-w-4xl relative'>
         <motion.div
           variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="space-y-8"
-        >
+          initial='hidden'
+          animate='visible'
+          className='space-y-8'>
           {/* Hero Section */}
-          <motion.div variants={itemVariants} className="relative">
-            <div className="rounded-2xl overflow-hidden aspect-video relative shadow-xl">
+          <motion.div variants={itemVariants} className='relative'>
+            <div className='rounded-2xl overflow-hidden aspect-video relative shadow-xl'>
               <Image
                 src={coverImage || "/placeholder.svg"}
                 alt={title}
                 fill
-                className="object-cover transition-transform rounded-2xl duration-700 hover:scale-105"
+                className='object-cover transition-transform rounded-2xl duration-700 hover:scale-105'
                 priority
-                placeholder="blur"
-                blurDataURL="/placeholder.svg"
+                placeholder='blur'
+                blurDataURL='/placeholder.svg'
               />
             </div>
 
-            <div className="absolute bottom-0 left-0 w-full p-6 z-50">
-              <div className="flex flex-wrap gap-2 mb-2">
+            <div className='absolute bottom-0 left-0 w-full p-6 z-50'>
+              <div className='flex flex-wrap gap-2 mb-2'>
                 {tags?.map((tag: string, index: number) => (
                   <motion.span
                     key={index}
                     whileHover={{ scale: 1.05 }}
-                    className="bg-indigo-500 text-white text-xs px-2 py-1 rounded-full"
-                  >
+                    className='bg-indigo-500 text-white text-xs px-2 py-1 rounded-full'>
                     {tag}
                   </motion.span>
                 ))}
@@ -189,68 +185,73 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
           </motion.div>
 
           {/* Post Meta */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold z-50 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]">
+          <motion.div variants={itemVariants} className='space-y-4'>
+            <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold z-50 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]'>
               {title}
             </h1>
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-full z-50 bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
+            <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
+              <div className='flex items-center space-x-4'>
+                <div className='w-12 h-12 rounded-full z-50 bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg'>
                   {author?.charAt(0)}
                 </div>
                 <div>
-                  <p className="font-medium z-50 text-white">{author}</p>
-                  <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
-                    <Calendar size={14} className="mr-1 z-50" />
-                    <span className="z-50">{formattedPublishDate}</span>
+                  <p className='font-medium z-50 text-white'>{author}</p>
+                  <div className='flex items-center text-gray-500 dark:text-gray-400 text-sm'>
+                    <Calendar size={14} className='mr-1 z-50' />
+                    <span className='z-50'>{formattedPublishDate}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex space-x-4 z-50 text-gray-400 text-sm">
-                <div className="flex items-center">
-                  <Clock size={14} className="mr-1 z-50" />
-                  <span className="z-50">Updated {timeAgo}</span>
+              <div className='flex space-x-4 z-50 text-gray-400 text-sm'>
+                <div className='flex items-center'>
+                  <Clock size={14} className='mr-1 z-50' />
+                  <span className='z-50'>Updated {timeAgo}</span>
                 </div>
-                <div className="flex items-center">
-                  <Eye size={14} className="mr-1 z-50" />
-                  <span className="z-50">{views?.toLocaleString()} views</span>
+                <div className='flex items-center'>
+                  <Eye size={14} className='mr-1 z-50' />
+                  <span className='z-50'>{views?.toLocaleString()} views</span>
                 </div>
               </div>
             </div>
           </motion.div>
 
           {/* Article Content */}
-          <motion.div
+          {/* <motion.div
             variants={itemVariants}
-            className="prose prose-lg max-w-none prose-invert text-white z-50 prose-headings:text-white prose-a:text-white"
+            className='prose prose-xl max-w-none prose-invert text-white z-50 
+             prose-headings:text-white prose-a:text-white
+             [&>h1]:!text-4xl [&>h1]:!font-bold [&>h1]:!mb-6
+             [&>h2]:!text-3xl [&>h2]:!font-semibold [&>h2]:!mb-4
+             [&>h3]:!text-2xl [&>h3]:!font-medium [&>h3]:!mb-3
+             [&>p]:!text-base [&>p]:!leading-relaxed [&>p]:!mb-4
+             [&>strong]:!font-bold [&>strong]:!text-white'
             dangerouslySetInnerHTML={{ __html: content }}
-          />
+          /> */}
+          <TipTapRenderer content={content} variants={itemVariants} />
 
           {/* Tags */}
           <motion.div
             variants={itemVariants}
-            className="pt-8 z-50 border-t border-gray-200 dark:border-gray-800"
-          >
-            <h3 className="text-lg font-medium text-white mb-4">
+            className='pt-8 z-50 border-t border-gray-200 dark:border-gray-800'>
+            <h3 className='text-lg font-medium text-white mb-4'>
               Related Topics
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className='flex flex-wrap gap-2'>
               {tags?.map((tag: string, index: number) => (
                 <motion.div key={index}>
                   {/* <Link
                     href={`/tag/${tag?.toLowerCase().replace(/\s+/g, "-")}`}
                     className="inline-block"
                   > */}
-                    <motion.span
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="bg-gray-800 text-gray-300 px-4 py-2 rounded-full transition duration-200 inline-flex items-center"
-                    >
-                      <Tag size={14} className="mr-1 z-50" />
-                      {tag}
-                    </motion.span>
+                  <motion.span
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className='bg-gray-800 text-gray-300 px-4 py-2 rounded-full transition duration-200 inline-flex items-center'>
+                    <Tag size={14} className='mr-1 z-50' />
+                    {tag}
+                  </motion.span>
                   {/* </Link> */}
                 </motion.div>
               ))}

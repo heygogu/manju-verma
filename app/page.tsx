@@ -7,16 +7,16 @@ async function getInitialData() {
     const [blogsRes, websitesRes, emailsRes, testimonialRes] =
       await Promise.all([
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}api/blogs?limit=6`, {
-          next: { revalidate: 5000 },
+          next: { revalidate: 0 },
         }),
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}api/websites/listing`, {
-          next: { revalidate: 5000 },
+          next: { revalidate: 0 },
         }),
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}api/emails/listing`, {
-          next: { revalidate: 5000 },
+          next: { revalidate: 0 },
         }),
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}api/testimonials`, {
-          next: { revalidate: 5000 },
+          next: { revalidate: 0 },
         }),
       ]);
 
