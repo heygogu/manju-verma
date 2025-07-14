@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   motion,
   useScroll,
   useTransform,
   AnimatePresence,
+  setDragLock,
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,6 +49,7 @@ import { Card, CardContent } from "./ui/card";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import PageLoader from "@/components/PageLoader2";
 
 interface BlogPost {
   author: string;
@@ -77,38 +79,67 @@ interface InitialData {
   testimonials: any;
 }
 
-export default function PortfolioContent({
-  initialData,
-}: {
-  initialData: InitialData;
-}) {
+export default function PortfolioContent() {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
+  const [loading, setLoading] = useState(true);
 
   const [isPending, startTransition] = useTransition();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const [blogListing, setBlogListing] = useState<BlogListing>(
-    initialData.blogListing
-  );
-  const [websiteListing, setWebsiteListing] = useState<any>(
-    initialData.websiteListing
-  );
-  const [emailListing, setEmailListing] = useState<any>(
-    initialData.emailListing
-  );
-  const [testimonials, setTestimonials] = useState<any>(
-    initialData.testimonials
-  );
+  const [blogListing, setBlogListing] = useState<any>();
+  const [websiteListing, setWebsiteListing] = useState<any>();
+  const [emailListing, setEmailListing] = useState<any>();
+  const [testimonials, setTestimonials] = useState<any>();
 
-  console.log(
-    "Listing",
-    blogListing,
-    websiteListing,
-    emailListing,
-    testimonials
-  );
+  async function getInitialData() {
+    try {
+      setLoading(true);
+      const [blogsRes, websitesRes, emailsRes, testimonialRes] =
+        await Promise.all([
+          fetch(`/api/blogs?limit=6`),
+          fetch(`/api/websites/listing`),
+          fetch(`/api/emails/listing`),
+          fetch(`/api/testimonials`),
+        ]);
 
+      const blogData = await blogsRes.json();
+      const websiteData = await websitesRes.json();
+      const emailData = await emailsRes.json();
+      const testimonialData = await testimonialRes.json();
+
+      // return {
+      //   blogListing: {
+      //     data: blogData.data || [],
+      //   },
+      //   websiteListing: websiteData,
+      //   emailListing: emailData,
+      //   testimonials: testimonialData,
+      // };
+      setBlogListing(blogData.data);
+      setEmailListing(emailData);
+      setWebsiteListing(websiteData);
+      setTestimonials(testimonialData);
+
+      setLoading(false);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+
+      setBlogListing([]);
+      setEmailListing([]);
+      setWebsiteListing([]);
+      setTestimonials([]);
+    }
+  }
+
+  useEffect(() => {
+    async function get() {
+      await getInitialData();
+    }
+
+    get();
+  }, []);
   const submitForm = async (e: any) => {
     e.preventDefault();
 
@@ -150,6 +181,10 @@ export default function PortfolioContent({
       }
     });
   };
+
+  if (loading) {
+    return <PageLoader />;
+  }
 
   return (
     <div className='min-h-screen grid grid-cols-1 bg-[#0F0F1A] text-white overflow-hidden'>
@@ -773,8 +808,8 @@ export default function PortfolioContent({
 
               <TabsContent value='blogs' className='mt-0'>
                 <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-                  {blogListing?.data?.length
-                    ? blogListing?.data?.map((project, i) => (
+                  {Array.isArray(blogListing)
+                    ? blogListing?.map((project: any, i: number) => (
                         <BlogCard key={i} project={project} index={i} />
                       ))
                     : ""}
