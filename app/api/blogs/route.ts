@@ -1,6 +1,4 @@
 
-
-import mongoose from "mongoose";
 import Blog from "@/app/models/BlogPost";
 import connectToDatabase from "@/app/utils/db";
 
@@ -8,18 +6,7 @@ export async function GET(req: Request) {
   try {
     // Connect to database
     await connectToDatabase();
-    
-    // Debug mongoose connection state
-    console.log("MongoDB Connection State:", mongoose.connection.readyState);
-    // 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
-    
-    if (mongoose.connection.readyState !== 1) {
-      throw new Error(`MongoDB not connected, state: ${mongoose.connection.readyState}`);
-    }
 
-    // Log available models
-    console.log("Registered Models:", Object.keys(mongoose.models));
-    
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get("page")) || 1;
     const limit = Number(searchParams.get("limit")) || 100;
@@ -31,15 +18,15 @@ export async function GET(req: Request) {
     // Create search query
     const searchQuery = search
       ? {
-          $or: [
-            { title: { $regex: search, $options: "i" } }, 
-            { content: { $regex: search, $options: "i" } },
-          ],
-        }
+        $or: [
+          { title: { $regex: search, $options: "i" } },
+          { content: { $regex: search, $options: "i" } },
+        ],
+      }
       : {};
 
     console.log("Executing MongoDB query with:", { searchQuery, skip, limit });
-    
+
     // Fetch blogs with pagination
     const blogs = await Blog.find(searchQuery)
       .sort({ createdAt: -1 })
@@ -47,16 +34,16 @@ export async function GET(req: Request) {
       .limit(limit)
       .lean();
 
-   
+
 
     return Response.json({
       data: blogs,
-    
+
     });
   } catch (error) {
     console.error("Error fetching blogs:", error);
-    return Response.json({ 
-      error: "Failed to fetch blogs", 
+    return Response.json({
+      error: "Failed to fetch blogs",
       details: error instanceof Error ? error.message : String(error)
     }, { status: 500 });
   }
