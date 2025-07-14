@@ -133,7 +133,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
       />
 
       {/* Background elements */}
-      <div
+      {/* <div
         className='fixed left-0 right-0 top-[calc(100vh-65vh)]'
         style={{ zIndex: 0 }}>
         <div className='absolute top-0 left-0 w-full h-full bg-[#0F0F1A] opacity-90' />
@@ -148,7 +148,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
             style={{ animationDelay: "2s" }}
           />
         </div>
-      </div>
+      </div> */}
 
       <main className='container mx-auto px-4 py-8 z-50 max-w-4xl relative'>
         <motion.div
@@ -209,10 +209,10 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                   <Clock size={14} className='mr-1 z-50' />
                   <span className='z-50'>Updated {timeAgo}</span>
                 </div>
-                <div className='flex items-center'>
+                {/* <div className='flex items-center'>
                   <Eye size={14} className='mr-1 z-50' />
                   <span className='z-50'>{views?.toLocaleString()} views</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </motion.div>
