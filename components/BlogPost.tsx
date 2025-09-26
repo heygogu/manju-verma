@@ -124,7 +124,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
   };
 
   return (
-    <div className='bg-[#0F0F1A]'>
+    <div className=''>
       {/* Progress bar */}
       <BlogJsonLd post={post.data} />
       <motion.div
@@ -186,7 +186,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
 
           {/* Post Meta */}
           <motion.div variants={itemVariants} className='space-y-4'>
-            <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold z-50 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#00FFFF]'>
+            <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold z-50 bg-clip-text text-transparent bg-gradient-to-r from-[#FF00FF] to-[#bf00ff]'>
               {title}
             </h1>
 

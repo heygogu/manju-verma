@@ -793,7 +793,7 @@ export default function PortfolioContent() {
                     className='cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white'>
                     Blogs
                   </TabsTrigger>
-                  <TabsTrigger
+                  {/* <TabsTrigger
                     value='emails'
                     className='cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white'>
                     Emails
@@ -802,7 +802,7 @@ export default function PortfolioContent() {
                     value='websites'
                     className='cursor-pointer rounded-2xl px-4 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FF00FF] data-[state=active]:to-[#00FFFF] data-[state=active]:text-white'>
                     Websites
-                  </TabsTrigger>
+                  </TabsTrigger> */}
                 </TabsList>
               </div>
 
